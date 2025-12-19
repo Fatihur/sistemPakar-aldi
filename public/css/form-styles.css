@@ -1,0 +1,134 @@
+/* --- Menggunakan variabel untuk konsistensi warna --- */
+:root {
+    --primary-color: #007bff; /* Biru primer yang cerah */
+    --primary-hover: #0056b3;
+    --secondary-color: #6c757d;
+    --background-color: #f4f6f9;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --input-focus-glow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Gaya untuk Kartu Formulir Utama --- */
+.card.card-primary.card-outline {
+    border-radius: 15px; /* Sudut lebih tumpul */
+    border: none;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: slide-in-up 0.6s ease-out; /* Animasi saat dimuat */
+}
+
+.card.card-primary.card-outline:hover {
+    transform: translateY(-5px); /* Efek terangkat saat disentuh mouse */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* --- Gaya untuk Input dan Label --- */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #495057;
+}
+
+.input-group {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.input-group:focus-within {
+    box-shadow: var(--input-focus-glow); /* Efek glow saat input aktif */
+}
+
+.input-group .form-control, 
+.input-group .form-select, 
+.input-group .input-group-text {
+    border: 1px solid #ced4da;
+    background-color: #fff;
+}
+
+.input-group .form-control:focus, 
+.input-group .form-select:focus {
+    box-shadow: none; /* Hapus glow bawaan agar tidak double */
+    border-color: var(--primary-color);
+}
+
+/* Menata Ikon di dalam Input */
+.input-group .input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    color: var(--secondary-color);
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.input-group:focus-within .input-group-text {
+    color: var(--primary-color);
+    background-color: #e9ecef;
+}
+
+.input-group input, .input-group select {
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+/* --- Gaya untuk Tombol Aksi --- */
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end; /* Tombol di sebelah kanan */
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary { 
+    background-color: var(--primary-color); 
+    color: white; 
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+.btn-primary:hover { 
+    background-color: var(--primary-hover); 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary { 
+    background-color: transparent;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+.btn-secondary:hover { 
+    background-color: #6c757d;
+    color: white;
+}
+
+/* --- Animasi --- */
+@keyframes slide-in-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

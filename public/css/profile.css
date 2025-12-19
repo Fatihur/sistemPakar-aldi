@@ -1,0 +1,213 @@
+/* Menggunakan variabel untuk konsistensi warna */
+:root {
+    --primary-color: #28a745;
+    --dark-text: #343a40;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* DIUBAH: Container sekarang hanya untuk satu kartu form */
+.profile-page-container-no-photo {
+    max-width: 800px; /* Lebar maksimal form */
+    margin: auto;
+}
+
+.profile-form-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    animation: slide-in-up 0.6s ease-out;
+}
+
+/* Form di Sebelah Kanan */
+.profile-form-card h4 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+/* Tombol */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary { background-color: var(--primary-color); color: white; }
+.btn-primary:hover { background-color: #218838; transform: translateY(-2px); }
+.btn-light { background-color: #e9ecef; color: var(--dark-text); }
+.btn-light:hover { background-color: #dee2e6; }
+
+/* Animasi */
+@keyframes slide-in-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Gaya untuk input group yang berisi ikon */
+.input-group {
+    position: relative;
+}
+
+/* Penataan untuk ikon di dalam input */
+.input-group .input-group-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #adb5bd; /* Warna ikon abu-abu */
+    pointer-events: none; /* Agar ikon tidak bisa diklik */
+}
+
+/* Beri padding kiri pada input agar teks tidak menimpa ikon */
+.input-group input {
+    padding-left: 2.75rem !important;
+}
+
+/* Ubah warna ikon menjadi lebih cerah saat input di-fokus */
+.input-group input:focus + .input-group-icon {
+    color: var(--primary-color);
+}
+
+/* Beri padding kiri PADA INPUT agar teks tidak menimpa ikon KIRI */
+.input-group input {
+    padding-left: 2.75rem !important;
+}
+
+/* DITAMBAHKAN: Beri padding kanan PADA INPUT agar teks tidak menimpa ikon MATA */
+.input-group input[type="password"], .input-group input[type="text"] {
+    padding-right: 2.75rem !important;
+}
+
+/* DITAMBAHKAN: Penataan untuk ikon mata di sebelah KANAN */
+.input-group .input-group-icon-toggle {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    color: #adb5bd;
+    cursor: pointer; /* Menjadikan ikon bisa diklik */
+    z-index: 5;
+}
+
+.input-group .input-group-icon-toggle:hover {
+    color: var(--primary-color); /* Ubah warna saat disentuh mouse */
+}
+
+
+/* 1. Untuk Tablet dan Layar Laptop Kecil (Max-width 768px) */
+@media (max-width: 768px) {
+    .profile-page-container-no-photo {
+        max-width: 95%; /* Gunakan hampir seluruh lebar layar */
+        padding: 0 10px;
+    }
+
+    .profile-form-card {
+        padding: 1.5rem; /* Kurangi padding dalam agar tidak terlalu boros tempat */
+    }
+}
+
+/* 2. Untuk Handphone / Layar Sempit (Max-width 576px) */
+@media (max-width: 576px) {
+    /* Atur ulang container */
+    .profile-page-container-no-photo {
+        margin: 1rem auto; /* Beri jarak sedikit dari atas */
+        width: 100%;
+        padding: 0 15px; /* Margin kiri kanan agar tidak nempel tepi layar */
+    }
+
+    .profile-form-card {
+        padding: 1.25rem; /* Padding lebih rapat lagi */
+        border-radius: 10px; /* Radius sudut sedikit diperkecil */
+    }
+
+    .profile-form-card h4 {
+        font-size: 1.25rem; /* Ukuran font judul disesuaikan */
+        text-align: center; /* Judul rata tengah di HP terlihat lebih rapi */
+    }
+
+    .profile-form-card p.text-muted {
+        font-size: 0.85rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Input Form */
+    .form-group {
+        margin-bottom: 1rem; /* Jarak antar input diperkecil */
+    }
+
+    .form-group label {
+        font-size: 0.9rem; /* Label sedikit lebih kecil */
+    }
+
+    .form-group input {
+        font-size: 14px; /* Mencegah zoom otomatis pada iOS saat diklik */
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+    }
+
+    /* Ikon di dalam input */
+    .input-group .input-group-icon, 
+    .input-group .input-group-icon-toggle {
+        font-size: 1rem; /* Sesuaikan ukuran ikon */
+    }
+
+    /* Tombol Aksi (Simpan & Batal) */
+    .form-actions {
+        flex-direction: column; /* Tombol disusun ke bawah (vertikal) */
+        gap: 0.75rem; /* Jarak antar tombol */
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        width: 100%; /* Tombol menjadi lebar penuh (full width) */
+        padding: 0.8rem; /* Area sentuh lebih besar untuk jari */
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Opsional: Jika ingin tombol 'Simpan' ada di atas tombol 'Batal' */
+    .btn-primary {
+        order: 1;
+    }
+    .btn-light {
+        order: 2;
+    }
+}

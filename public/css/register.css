@@ -1,0 +1,172 @@
+/* --- Latar Belakang & Gaya Utama --- */
+body {
+    /* Ganti dengan path gambar sawah Anda */
+    background-image: url('img/sawah.jpg');
+    
+    /* Properti agar gambar latar memenuhi layar */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Pastikan body mengisi seluruh tinggi viewport */
+    height: 100vh;
+    margin: 0;
+}
+
+/* --- Efek Kaca Transparan (Glassmorphism) untuk Kotak Registrasi --- */
+.register-box .card {
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Untuk support Safari */
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Bayangan dengan sedikit warna */
+    color:#ffffff;
+}
+
+
+/* --- Menyesuaikan Warna Teks & Link agar Terlihat --- */
+.register-box .card-header,
+.register-box .register-card-body,
+.register-box-msg,
+.form-check-label {
+    /* Diubah: Warna teks utama diubah menjadi lebih gelap agar kontras dengan background terang */
+    color: #333; 
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.7); /* Bayangan terang untuk efek emboss */
+}
+
+/* Judul "Sistem Pakar Padi" */
+.register-box .link-dark h1 {
+    color: #ffffff !important; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Menambahkan bayangan agar lebih terbaca */
+}
+
+.register-box a {
+    color: #0056b3; /* Warna link biru yang lebih gelap dan terbaca */
+    font-weight: 500;
+}
+.register-box a:hover {
+    color: #007bff;
+}
+
+/* --- Menyesuaikan Tampilan Input Form --- */
+/* PERBAIKAN: Selector dibuat lebih spesifik untuk memastikan gaya diterapkan */
+.register-box .register-card-body .form-control,
+.register-box .register-card-body .input-group-text {
+    background-color: rgba(255, 255, 255, 0.4); /* Latar belakang input dibuat sedikit lebih solid */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Warna teks di dalam input diubah menjadi gelap */
+    color: #212529; 
+}
+
+/* Mengubah warna ikon di dalam input-group-text */
+.register-box .register-card-body .input-group-text span {
+    color: #495057;
+}
+
+.register-box .register-card-body .form-control::placeholder {
+    color: #6c757d; /* Warna placeholder juga digelapkan */
+    opacity: 1;
+}
+
+.register-box .register-card-body .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #212529;
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+/* Menyesuaikan floating label */
+.register-box .register-card-body .form-floating > label {
+    /* Warna label diubah menjadi gelap agar terbaca */
+    color: #495057; 
+}
+
+/* --- Tombol Daftar --- */
+.register-box .btn-primary {
+    background-color: #28a745; 
+    border-color: #28a745;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+}
+.register-box .btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+/* 1. Tablet & Layar Kecil (Max Width: 768px) */
+@media (max-width: 768px) {
+    .register-box {
+        width: 80%; /* Memperlebar kotak agar tidak terlihat kurus di tablet */
+        margin: 0 auto; /* Tengah horizontal */
+    }
+
+    .register-box .link-dark h1 {
+        font-size: 1.8rem; /* Sedikit mengecilkan judul */
+    }
+}
+
+/* 2. Mobile / HP (Max Width: 576px) */
+@media (max-width: 576px) {
+    body {
+        /* Mengubah height fix menjadi min-height agar bisa discroll 
+           jika konten panjang atau keyboard muncul */
+        height: auto;
+        min-height: 100vh; 
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .register-box {
+        width: 92%; /* Hampir memenuhi lebar layar HP */
+        margin-top: 10px;
+    }
+
+    /* Keterbacaan: Membuat latar kartu sedikit lebih solid di HP */
+    .register-box .card {
+        /* Mengurangi transparansi agar teks lebih mudah dibaca 
+           di layar kecil yang background-nya padat */
+        background: rgba(255, 255, 255, 0.15); 
+        /* Mengurangi beban blur untuk performa HP kentang */
+        backdrop-filter: blur(8px); 
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Judul Sistem Pakar */
+    .register-box .link-dark h1 {
+        font-size: 1.5rem; /* Ukuran font judul disesuaikan */
+        margin-bottom: 15px;
+    }
+
+    /* Memastikan input form mudah ditekan (Touch Friendly) */
+    .register-box .register-card-body .form-control {
+        font-size: 1rem; /* Mencegah zoom otomatis di iOS saat input diklik */
+        padding: 12px;   /* Area sentuh lebih besar */
+    }
+
+    .register-box .btn-primary {
+        padding: 12px; /* Tombol lebih tebal agar mudah dipencet jempol */
+        font-size: 1.1rem;
+    }
+}
+
+/* 3. Mode Landscape di HP (Layar Pendek) */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    .register-box {
+        margin-top: 0;
+    }
+
+    .register-box .link-dark h1 {
+        display: none; /* Opsional: Sembunyikan judul besar agar form langsung terlihat */
+    }
+
+    .register-box .card-body {
+        padding: 10px; /* Kurangi padding agar muat */
+    }
+}

@@ -1,0 +1,221 @@
+/* Kartu Hasil Utama */
+.result-card {
+    border: none;
+    border-radius: 15px;
+    background: #fff;
+}
+
+/* Lingkaran Persentase */
+.confidence-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#28a745 var(--confidence, 0%), #e9ecef 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    transition: --confidence 1s ease-in-out;
+    animation: fill-circle 1s ease-out forwards;
+}
+
+@keyframes fill-circle {
+    from { --confidence: 0; }
+    to { /* Nilai akan di-set oleh JS, tapi kita set default */ }
+}
+
+.confidence-circle .confidence-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #28a745;
+}
+
+.disease-name {
+    font-weight: 700;
+    color: #343a40;
+}
+
+.disease-image {
+    max-height: 250px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Daftar Solusi */
+.solution-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.solution-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px 15px;
+    flex-basis: 200px;
+    flex-grow: 1;
+}
+
+.solution-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 5px;
+    background: #fff;
+    padding: 2px;
+}
+
+/* Gambar */
+.solution-image-clickable {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.solution-image-clickable:hover {
+    transform: scale(1.1);
+}
+
+.obat-modal-overlay {
+    display: none; /* Sembunyi secara default */
+    position: fixed;
+    z-index: 1060; /* Pastikan di atas segalanya */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.obat-modal-content {
+    position: relative;
+    text-align: center;
+}
+
+#modal-obat-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+#modal-obat-caption {
+    margin-top: 15px;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+.close-obat-modal {
+    position: absolute;
+    top: -15px;
+    right: 15px;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.close-obat-modal:hover {
+    color: #bbb;
+}
+
+/* Animasi (mungkin sudah ada, tidak masalah) */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes zoomIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+
+/* 1. Tablet & Layar Kecil (Max Width: 768px) */
+@media (max-width: 768px) {
+    /* Menyesuaikan ukuran lingkaran agar tidak terlalu mendominasi */
+    .confidence-circle {
+        width: 130px;
+        height: 130px;
+    }
+
+    .confidence-circle .confidence-value {
+        font-size: 1.75rem;
+    }
+
+    /* Grid solusi menjadi 2 kolom (atau menyesuaikan sisa ruang) */
+    .solution-item {
+        flex-basis: 45%; /* Agar muat 2 item per baris */
+    }
+}
+
+/* 2. Mobile / HP (Max Width: 576px) */
+@media (max-width: 576px) {
+    /* Lingkaran lebih kecil lagi untuk layar sempit */
+    .confidence-circle {
+        width: 110px;
+        height: 110px;
+    }
+
+    .confidence-circle .confidence-value {
+        font-size: 1.5rem;
+    }
+
+    /* Gambar penyakit tidak terlalu tinggi agar konten bawah terlihat */
+    .disease-image {
+        max-height: 180px;
+    }
+
+    /* Daftar solusi menjadi 1 kolom penuh (stack ke bawah) */
+    .solution-item {
+        flex-basis: 100%;
+        padding: 10px; /* Sedikit mengurangi padding jika perlu */
+    }
+
+    .solution-list {
+        gap: 0.8rem;
+    }
+
+    /* Penyesuaian Modal agar tombol close mudah dipencet jari */
+    .close-obat-modal {
+        top: 10px;
+        right: 10px;
+        font-size: 2.5rem;
+        background: rgba(0, 0, 0, 0.5); /* Background agar kontras dgn gambar */
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 5px; /* Visual adjustment untuk text '×' */
+    }
+
+    #modal-obat-image {
+        max-width: 95vw; /* Memanfaatkan lebar layar lebih banyak */
+    }
+
+    #modal-obat-caption {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}
+
+/* 3. Landscape Mode di HP (Optional - Tinggi layar pendek) */
+@media (max-height: 500px) and (orientation: landscape) {
+    .disease-image {
+        max-height: 120px; /* Kurangi tinggi gambar drastis */
+    }
+    
+    .confidence-circle {
+        display: none; /* Sembunyikan lingkaran jika mengganggu view landscape */
+    }
+}

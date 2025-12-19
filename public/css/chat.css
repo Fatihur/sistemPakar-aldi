@@ -1,0 +1,117 @@
+/* Import font dari Google Fonts untuk tampilan yang lebih modern */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+/* --- Tampilan Umum Kartu Chat --- */
+.direct-chat {
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.direct-chat .card-header {
+    background: linear-gradient(to right, #28a745, #218838); /* Gradient hijau */
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom: none;
+}
+
+.direct-chat .card-title {
+    font-weight: 500;
+}
+
+/* --- Area Percakapan --- */
+.direct-chat-messages {
+    background-color: #f0f8f0; /* Warna latar belakang hijau sangat muda (Honeydew) */
+    padding: 20px;
+    height: 400px; /* Atur tinggi sesuai kebutuhan, bisa scroll */
+}
+
+/* --- Gelembung Chat (Bubble) --- */
+.direct-chat-msg {
+    margin-bottom: 20px; /* Jarak antar pesan */
+}
+
+.direct-chat-text {
+    border-radius: 18px;
+    padding: 12px 18px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    word-wrap: break-word;
+}
+
+/* Gelembung chat dari PAKAR (kiri) */
+.direct-chat-msg:not(.end) .direct-chat-text {
+    background-color: #ffffff; /* Warna putih bersih */
+    color: #333;
+    border: 1px solid #e9e9e9;
+}
+
+/* Gelembung chat dari PETANI (kanan) */
+.direct-chat-msg.end .direct-chat-text {
+    background-color: #dcf8c6; /* Warna hijau khas chat */
+    color: #1e1e1e;
+}
+
+/* --- Ekor Chat (Chat Tails) --- */
+/* Menambahkan segitiga kecil di ujung bubble */
+.direct-chat-text::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    border: 6px solid transparent;
+}
+
+/* Ekor untuk bubble kiri (Pakar) */
+.direct-chat-msg:not(.end) .direct-chat-text::before {
+    left: -12px;
+    border-right-color: #ffffff;
+}
+
+/* Ekor untuk bubble kanan (Petani) */
+.direct-chat-msg.end .direct-chat-text::before {
+    right: -12px;
+    border-left-color: #dcf8c6;
+}
+
+/* --- Avatar dan Info Pesan --- */
+.direct-chat-img {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    border: 2px solid white;
+}
+
+.direct-chat-name {
+    font-weight: 500;
+}
+
+.direct-chat-timestamp {
+    color: #888;
+}
+
+/* --- Area Input Pesan --- */
+.direct-chat .card-footer {
+    background-color: #f9f9f9;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.direct-chat .form-control {
+    border-radius: 20px;
+    border-color: #ddd;
+}
+.direct-chat .form-control:focus {
+    box-shadow: none;
+    border-color: #28a745;
+}
+
+.direct-chat .btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+    border-radius: 20px;
+    padding: 8px 20px;
+}
+.direct-chat .btn-primary:hover {
+    background-color: #218838;
+    border-color: #218838;
+}

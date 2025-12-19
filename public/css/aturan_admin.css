@@ -1,0 +1,214 @@
+/* --- Style untuk Halaman Index --- */
+.gejala-list .badge {
+    margin: 2px;
+    font-size: 0.85rem;
+    padding: 0.4em 0.6em;
+}
+
+/* --- Style untuk Halaman Create & Edit --- */
+
+/* Membuat Select2 lebih tinggi */
+.select2-container .select2-selection--multiple {
+    min-height: 150px !important;
+}
+
+/* * Style untuk 'tag' yang dipilih di Select2
+ * Ini membuatnya terlihat jauh lebih modern
+ */
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Style untuk tombol 'x' (hapus tag) */
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove {
+    color: white;
+    font-size: 1.2rem;
+    margin-right: 5px;
+    transition: all 0.2s ease;
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #ffc107;
+    transform: scale(1.1);
+}
+
+.custom-pagination .small.text-muted {
+    display: none;
+}
+
+/* --- Style untuk Halaman Create & Edit (Checkbox Grid) --- */
+
+/* Wrapper untuk grid */
+.symptom-grid-wrapper {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
+    max-height: 400px; /* Batasi tinggi agar tidak terlalu panjang */
+    overflow-y: auto; /* Tambahkan scroll jika penuh */
+}
+.symptom-grid-wrapper.is-invalid {
+    border-color: #dc3545; /* Border merah jika error validasi */
+}
+
+/* Grid Gejala */
+.symptom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+/* Kartu Gejala (Checklist) */
+.symptom-card {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+}
+
+.symptom-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* DITAMBAHKAN: Style untuk tanda centang di dalam dropdown
+*/
+.select2-container--bootstrap-5 .select2-results__option .check-icon {
+    font-size: 0.9rem;
+    margin-right: 8px;
+    color: #a0a0a0; /* Warna centang 'kosong' */
+}
+.select2-container--bootstrap-5 .select2-results__option[aria-selected="true"] .check-icon {
+    color: #28a745; /* Warna centang 'terpilih' */
+    font-weight: bold;
+}
+
+
+/* --- Tablet & Mobile (max-width: 991px) --- */
+@media (max-width: 991px) {
+    /* Mengurangi tinggi Select2 agar tidak memakan setengah layar HP */
+    .select2-container .select2-selection--multiple {
+        min-height: 100px !important; /* Turun dari 150px */
+    }
+}
+
+/* --- 1. Tablet & Layar Menengah (max-width: 991px) --- */
+@media (max-width: 991px) {
+    /* Select2 (Create/Edit): Kurangi tinggi agar tidak memakan tempat */
+    .select2-container .select2-selection--multiple {
+        min-height: 100px !important;
+    }
+}
+
+/* --- 2. Mobile Landscape & Tablet Kecil (max-width: 768px) --- */
+@media (max-width: 768px) {
+    
+    /* --- Penyesuaian Header Kartu & Pencarian --- */
+    .card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .card-tools {
+        width: 100%; /* Agar form pencarian memenuhi lebar */
+        margin-top: 10px;
+    }
+
+    .card-tools form {
+        width: 100% !important; /* Override style inline 'width: 250px' di HTML */
+    }
+
+    /* --- Penyesuaian Tabel --- */
+    .table thead th {
+        font-size: 0.8rem;
+        white-space: nowrap; /* Mencegah judul kolom turun baris berantakan */
+    }
+
+    .table tbody td {
+        font-size: 0.85rem;
+        padding: 0.5rem; /* Kurangi padding sel */
+    }
+
+    /* Kolom Gejala: Perkecil badge agar muat banyak */
+    .gejala-list .badge {
+        font-size: 0.7rem;
+        padding: 0.3em 0.5em;
+        margin: 1px;
+    }
+
+    /* --- Penyesuaian Create/Edit (Grid Checkbox) --- */
+    .symptom-grid-wrapper {
+        max-height: 300px; /* Kurangi tinggi scroll */
+    }
+
+    .symptom-grid {
+        /* Ubah menjadi 1 kolom penuh di HP agar teks gejala panjang terbaca */
+        grid-template-columns: 1fr; 
+        gap: 0.5rem;
+    }
+
+    .symptom-card {
+        padding: 0.75rem; 
+    }
+
+    /* Matikan efek hover (naik ke atas) di HP agar scrolling mulus */
+    .symptom-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: #dee2e6;
+    }
+}
+
+/* --- 3. Mobile Portrait (max-width: 576px) --- */
+@media (max-width: 576px) {
+    
+    /* --- Tombol Aksi (Lihat, Edit, Hapus) --- */
+    /* Di layar kecil, tombol berjejer 3 akan merusak tabel.
+       Kita buat mereka menumpuk (stack) ke bawah. */
+    .table td .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px; /* Jarak antar tombol */
+        font-size: 0.8rem;  /* Font tombol lebih kecil */
+    }
+
+    /* Hapus margin tombol terakhir */
+    .table td form .btn {
+        margin-bottom: 0;
+    }
+    
+    /* Pastikan kolom aksi punya lebar minimum agar tombol tidak gepeng */
+    .table th:last-child, 
+    .table td:last-child {
+        min-width: 80px;
+    }
+
+    /* --- Paginasi --- */
+    /* Jika paginasi panjang, biarkan wrap ke baris baru */
+    .custom-pagination {
+        justify-content: center !important; /* Tengahkan paginasi */
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* --- Select2 Create/Edit --- */
+    /* Font tag pilihan diperkecil */
+    .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
+        font-size: 0.8rem;
+        padding: 2px 5px;
+    }
+}

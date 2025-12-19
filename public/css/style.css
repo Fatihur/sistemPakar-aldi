@@ -1,0 +1,121 @@
+/* --- Style untuk Container Kartu Utama --- */
+.card {
+    border-radius: 15px; /* Sudut lebih tumpul */
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Bayangan lebih halus */
+    overflow: hidden; /* Memastikan sudut tumpul diterapkan pada semua elemen anak */
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #343a40;
+}
+
+/* --- Style untuk Daftar Kontak/Percakapan --- */
+.contacts-list > li {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fade-in-up 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Animasi untuk setiap item list */
+@for $i from 1 through 20 {
+    .contacts-list > li:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+    }
+}
+
+@keyframes fade-in-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efek saat kursor mouse di atas item list */
+.contacts-list > li:hover {
+    background-color: #e9f5ff; /* Warna biru muda yang lembut */
+    transform: translateX(5px); /* Sedikit bergeser ke kanan */
+}
+
+.contacts-list > li a {
+    color: #495057;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+
+/* Style untuk Avatar/Gambar */
+.contacts-list-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 1.5rem;
+    border: 2px solid #ffffff;
+}
+
+/* Info Kontak: Nama, Pesan, Tanggal */
+.contacts-list-info {
+    width: 100%;
+}
+
+.contacts-list-name {
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 0.25rem;
+}
+
+.contacts-list-date {
+    font-size: rem;
+    color: #1264ac;
+}
+
+.contacts-list-msg {
+    color: #495057;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* Style untuk pesan jika belum ada percakapan */
+.contacts-list .empty-message {
+    padding: 2rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+/* Indikator Pesan Baru (Opsional) */
+/* Tambahkan class 'unread' pada <li> jika ada pesan baru */
+.contacts-list > li.unread .contacts-list-name {
+    color: #007bff; /* Warna biru untuk nama pengirim */
+}
+
+.contacts-list > li.unread .contacts-list-msg {
+    font-weight: bold; 
+    color: #343a40;
+}
+
+.contacts-list > li.unread {
+    background-color: #f8f9fa; 
+    border-left: 4px solid #007bff; 
+}
+
+.contacts-list .contacts-list-msg {
+    color: #495057; 
+}
+
+.contacts-list .contacts-list-date {
+    color: #6c757d;
+}

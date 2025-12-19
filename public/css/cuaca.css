@@ -1,0 +1,83 @@
+/* --- Gaya Utama Kartu Cuaca --- */
+#weather-card {
+    border: none;
+    border-radius: 20px; /* Sudut yang lebih tumpul */
+    color: white;
+    /* Gradient biru yang segar sebagai latar belakang */
+    background: linear-gradient(135deg, #5c97f7 0%, #3a7bf0 100%);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Efek bayangan agar kartu terangkat */
+    overflow: hidden; /* Memastikan konten tidak keluar dari sudut tumpul */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efek interaktif saat kursor mouse berada di atas kartu */
+#weather-card:hover {
+    transform: translateY(-5px); /* Sedikit mengangkat kartu */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Gaya untuk bagian header kartu */
+#weather-card .card-header {
+    background: rgba(255, 255, 255, 0.1); /* Latar belakang transparan */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    padding: 1rem;
+}
+
+#weather-card .card-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Gaya untuk bagian body kartu */
+#weather-card .card-body {
+    padding: 2rem;
+}
+
+#weather-content {
+    gap: 20px; /* Memberi jarak antara ikon dan info teks */
+}
+
+/* --- Gaya Ikon dan Teks --- */
+
+/* Membuat ikon cuaca lebih besar */
+#weather-icon img {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2)); /* Memberi bayangan pada ikon */
+}
+
+/* Gaya untuk info teks di sebelah kanan ikon */
+#weather-info h4, #weather-info p {
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Memberi bayangan pada semua teks */
+}
+
+/* Lokasi menjadi lebih besar */
+#weather-location {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* Deskripsi cuaca (mis: Cerah Berawan) */
+#weather-description {
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.9;
+    margin-bottom: 1rem; /* Jarak ke temperatur */
+}
+
+/* Temperatur menjadi elemen paling menonjol */
+#weather-temp {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Detail kelembapan dan angin */
+#weather-details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}

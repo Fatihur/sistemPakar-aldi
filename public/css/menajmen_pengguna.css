@@ -1,0 +1,44 @@
+/* Tablet & Mobile (Max Width: 768px) */
+@media (max-width: 768px) {
+    /* Header Stack (Atas Bawah) */
+    .app-content-header .row {
+        display: flex; flex-direction: column; gap: 15px; text-align: center;
+    }
+    .app-content-header .col-sm-6 {
+        width: 100%; display: flex; flex-direction: column; 
+        align-items: center; justify-content: center;
+    }
+    .app-content-header h3 { margin-bottom: 15px !important; font-size: 1.5rem; }
+    
+    /* Tombol & Search */
+    .app-content-header .card-tools {
+        width: 100%; flex-direction: column; gap: 10px;
+    }
+    .app-content-header .card-tools form.input-group { width: 100% !important; }
+    .app-content-header .btn-primary { width: 100%; margin-right: 0 !important; }
+    
+    /* Breadcrumb */
+    .breadcrumb { justify-content: center; margin-top: 5px; }
+}
+
+/* Mobile Only (Max Width: 576px) */
+@media (max-width: 576px) {
+    /* Card Header dalam Tabel */
+    .card .card-header {
+        display: flex; flex-direction: column; align-items: start; gap: 10px;
+    }
+    .card .card-header .card-title { margin-bottom: 5px; }
+    .card .card-header .card-tools { width: 100%; margin-top: 5px; }
+    .card .card-header form.input-group { width: 100% !important; }
+
+    /* Scrollable Table Fix */
+    .table-responsive { -webkit-overflow-scrolling: touch; }
+    .table th, .table td {
+        white-space: nowrap; vertical-align: middle;
+        font-size: 0.9rem; padding: 0.5rem;
+    }
+    
+    /* Action Buttons */
+    .table td:last-child { min-width: 120px; }
+    .table td:last-child .btn { padding: 0.25rem 0.5rem; font-size: 0.75rem; }
+}

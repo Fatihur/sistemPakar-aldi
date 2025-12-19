@@ -1,0 +1,132 @@
+/* =========================================
+   STYLE TAMBAHAN (BASE)
+   ========================================= */
+
+/* Pastikan Peta memiliki tinggi di semua layar */
+#map {
+    width: 100%;
+    height: 400px; /* Default height untuk desktop */
+    border-radius: 8px;
+    z-index: 1; /* Agar tidak menutupi dropdown navbar */
+}
+
+/* Style untuk Weather Card agar rapi */
+#weather-content {
+    min-height: 120px;
+}
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+
+/* --- 1. Tablet & Mobile Landscape (max-width: 991px) --- */
+@media (max-width: 991px) {
+    /* Penyesuaian Header Dashboard */
+    .app-content-header .row {
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .app-content-header .breadcrumb {
+        justify-content: center;
+        float: none !important;
+    }
+
+    /* Sidebar otomatis sembunyi (handled by AdminLTE JS), 
+       tapi kita pastikan overlay-nya bagus */
+    .sidebar-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* --- 2. Mobile Portrait (max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* --- Navbar --- */
+    .app-header .navbar-nav .nav-link {
+        padding: 0.5rem 0.8rem; /* Kurangi padding icon navbar */
+    }
+
+    /* Sembunyikan nama user, sisakan foto saja (sudah ada d-none d-md-inline di HTML, 
+       ini untuk memastikan margin rapi) */
+    .user-menu .user-image {
+        margin-right: 0;
+        width: 30px;
+        height: 30px;
+    }
+
+    /* --- Small Boxes (Widget Statistik) --- */
+    .small-box {
+        text-align: center;
+        min-height: 120px; /* Tinggi minimal agar seragam */
+    }
+
+    .small-box .inner {
+        padding: 10px;
+    }
+
+    .small-box h3 {
+        font-size: 1.5rem; /* Perkecil angka statistik */
+        font-weight: 700;
+    }
+
+    .small-box p {
+        font-size: 0.85rem; /* Perkecil label */
+        margin-bottom: 20px; /* Beri jarak agar tidak tertutup link */
+    }
+
+    /* Ikon background di widget */
+    .small-box .small-box-icon {
+        display: none; /* Opsi A: Sembunyikan ikon di HP agar text terbaca jelas */
+        /* ATAU Opsi B: Gunakan style di bawah ini jika ingin ikon tetap ada tapi transparan */
+        /* font-size: 3rem !important;
+        top: 5px !important;
+        right: 5px !important;
+        opacity: 0.2 !important;
+        */
+    }
+
+    .small-box-footer {
+        padding: 5px;
+        font-size: 0.8rem;
+    }
+
+    /* --- Peta & Weather --- */
+    #map {
+        height: 300px; /* Kurangi tinggi peta di HP */
+    }
+
+    #weather-card .card-body {
+        padding: 1rem;
+    }
+
+    #weather-icon img {
+        width: 60px; /* Perkecil ikon cuaca */
+    }
+
+    #weather-info h4 {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- 3. Mobile Kecil (max-width: 480px) --- */
+@media (max-width: 480px) {
+    /* Paksa kolom widget menjadi 1 baris (full width) jika layar sangat sempit */
+    /* Secara default bootstrap col-6 akan membuatnya 2 kolom. 
+       Jika ingin 1 kolom ke bawah, uncomment kode di bawah ini: */
+    
+    /* .col-6 {
+        width: 100%; 
+        flex: 0 0 auto;
+    } 
+    */
+
+    /* Footer Aplikasi */
+    .app-footer {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    
+    .app-footer .float-end {
+        display: none !important; /* Sembunyikan teks kanan footer */
+    }
+}

@@ -1,0 +1,263 @@
+.custom-pagination .small.text-muted {
+    display: none;
+}
+/* --- Gaya untuk Kartu Utama --- */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-header .card-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* --- Gaya untuk Tabel --- */
+.table thead th {
+    background-color: #f8f9fa;
+    border-top: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-bottom-width: 2px;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f8ff; /* Warna biru muda saat hover */
+    transform: scale(1.01); /* Sedikit membesar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Gaya untuk Gambar Thumbnail --- */
+.disease-image-thumbnail {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.disease-image-thumbnail:hover {
+    transform: scale(1.2); /* Efek zoom saat hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Gaya untuk Modal Gambar (Lightbox) --- */
+.image-modal-overlay {
+    display: none; /* Sembunyi secara default */
+    position: fixed;
+    z-index: 1050; /* Di atas segalanya */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.85); /* Latar belakang hitam transparan */
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.image-modal-content {
+    position: relative;
+    text-align: center;
+}
+
+#modal-image {
+    max-width: 80vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+#modal-caption {
+    margin-top: 15px;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+.close-image-modal {
+    position: absolute;
+    top: -15px;
+    right: 15px;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-image-modal:hover {
+    color: #bbb;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); }
+    to { transform: scale(1); }
+}
+/* Kontainer utama paginasi */
+.custom-pagination .pagination {
+    margin: 0; /* Menghapus margin bawaan */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    border-radius: 0.5rem; /* Sudut tumpul */
+}
+
+/* Tombol paginasi (angka, panah) */
+.custom-pagination .page-link {
+    color: #007bff; /* Warna teks biru */
+    border: 1px solid #dee2e6;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Efek hover pada tombol */
+.custom-pagination .page-link:hover {
+    background-color: #f1f8ff;
+    color: #0056b3;
+    transform: translateY(-2px); /* Efek sedikit terangkat */
+}
+
+/* Tombol yang sedang aktif (halaman saat ini) */
+.custom-pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Tombol non-aktif (misal panah 'previous' di halaman 1) */
+.custom-pagination .page-item.disabled .page-link {
+    color: #adb5bd;
+    background-color: #f8f9fa;
+}
+
+/* Menyesuaikan sudut untuk tombol pertama dan terakhir */
+.custom-pagination .page-item:first-child .page-link {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.custom-pagination .page-item:last-child .page-link {
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* 1. Tablet & Layar Menengah (Max Width: 768px) */
+@media (max-width: 768px) {
+    /* --- Modal: Gambar lebih lebar di tablet --- */
+    #modal-image {
+        max-width: 90vw; /* Mengambil 90% lebar layar */
+        max-height: 70vh;
+    }
+}
+
+/* 2. Mobile / HP (Max Width: 576px) */
+@media (max-width: 576px) {
+    
+    /* --- Gaya Kartu (Hemat Ruang) --- */
+    .card-header {
+        padding: 1rem; /* Kurangi padding header */
+    }
+    
+    .card-header .card-title {
+        font-size: 1.1rem;
+    }
+
+    /* --- Tabel di HP --- */
+    /* Matikan efek zoom pada baris tabel di layar sentuh agar scrolling mulus */
+    .table-hover tbody tr:hover {
+        transform: none; 
+        box-shadow: none;
+        background-color: transparent; /* Atau biarkan default */
+    }
+    
+    .table thead th {
+        font-size: 0.75rem; /* Font header tabel lebih kecil */
+        padding: 0.5rem;
+    }
+    
+    .table tbody td {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+    }
+
+    /* --- Gambar Thumbnail --- */
+    .disease-image-thumbnail {
+        width: 70px;  /* Perkecil ukuran thumbnail */
+        height: 50px;
+        /* Matikan efek zoom hover gambar di HP */
+        transition: none; 
+    }
+    
+    .disease-image-thumbnail:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* --- Modal Lightbox (Penting untuk UX Mobile) --- */
+    #modal-image {
+        max-width: 95vw; /* Gambar hampir full width */
+    }
+
+    .close-image-modal {
+        /* Pindahkan tombol close ke dalam area pandang aman */
+        top: 10px;
+        right: 10px;
+        font-size: 2rem;
+        
+        /* Tambahkan background agar terlihat jelas di atas gambar apa pun */
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%; /* Jadi bulat */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 4px; /* Penyesuaian vertikal ikon '×' */
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    #modal-caption {
+        font-size: 0.9rem; /* Caption lebih kecil */
+        padding: 0 10px;
+    }
+
+    /* --- Paginasi --- */
+    .custom-pagination .page-link {
+        padding: 0.375rem 0.75rem; /* Tombol paginasi sedikit lebih kecil */
+        font-size: 0.9rem;
+    }
+
+    .custom-pagination .page-link:hover {
+        transform: none; /* Matikan efek naik saat hover di HP */
+    }
+}
+
+/* 3. Penyesuaian Landscape di HP (Layar Pendek) */
+@media (max-height: 500px) and (orientation: landscape) {
+    #modal-image {
+        max-height: 85vh; /* Biarkan gambar lebih tinggi */
+    }
+    .card-header {
+        padding: 0.5rem 1rem; /* Header lebih tipis lagi */
+    }
+}

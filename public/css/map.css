@@ -1,0 +1,45 @@
+/* Agar Peta terlihat cantik */
+#map {
+    height: 300px; /* Tinggi peta */
+    width: 100%;
+    border-radius: 15px; /* Sudut melengkung */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    z-index: 1;
+}
+
+/* Custom Popup Style */
+.custom-popup .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+}
+.custom-popup .leaflet-popup-content {
+    margin: 0;
+    width: 280px !important;
+}
+.popup-header {
+    background-color: #198754; /* Warna Hijau Pertanian */
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.popup-body {
+    padding: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+.btn-rute {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #0d6efd;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.btn-rute:hover {
+    background-color: #0b5ed7;
+    color: white;
+}

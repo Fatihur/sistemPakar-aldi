@@ -1,0 +1,261 @@
+/* =========================================
+   BASE STYLES (Desktop First)
+   ========================================= */
+
+/* --- 1. Custom Card Design --- */
+.custom-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+/* --- 2. Header Styling --- */
+.page-header-title {
+    font-weight: 700;
+    color: #343a40;
+    letter-spacing: -0.5px;
+}
+
+/* --- 3. Search Bar Modern --- */
+.search-box {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-box input {
+    border-radius: 50px;
+    padding-left: 40px; /* Ruang untuk ikon */
+    border: 1px solid #e9ecef;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.search-box input:focus {
+    background-color: #fff;
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adb5bd;
+}
+
+/* --- 4. Modern Table Styling --- */
+.modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Jarak antar baris */
+}
+
+.modern-table thead th {
+    border: none;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 15px;
+    background: transparent;
+    white-space: nowrap; /* Mencegah judul kolom turun baris */
+}
+
+.modern-table tbody tr {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efek Hover hanya untuk Desktop (Non-Touch) */
+@media (hover: hover) {
+    .modern-table tbody tr:hover {
+        background-color: #fcfcfc;
+        transform: scale(1.01);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        z-index: 10;
+        position: relative;
+    }
+}
+
+.modern-table td {
+    border: none;
+    padding: 15px;
+    vertical-align: middle;
+    background-color: #fff;
+}
+
+/* Membulatkan ujung kiri dan kanan baris */
+.modern-table td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.modern-table td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+/* --- 5. Badges --- */
+.code-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    box-shadow: 0 3px 10px rgba(118, 75, 162, 0.3);
+    white-space: nowrap;
+}
+
+/* --- 6. Animasi Fade In --- */
+.fade-in-row {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-pagination .small.text-muted {
+    display: none;
+}
+
+/* =========================================
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+
+/* --- Tablet & Mobile (max-width: 991px) --- */
+@media (max-width: 991px) {
+    /* Header Card (Judul & Search) menjadi vertikal */
+    .custom-card .d-flex.justify-content-between {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 15px;
+    }
+
+    /* Search box memenuhi lebar kartu */
+    .search-box {
+        max-width: 100%;
+    }
+
+    .card-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+/* --- Mobile Phone (max-width: 768px) --- */
+@media (max-width: 768px) {
+    .app-content-header {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .custom-card {
+        padding: 1.5rem !important; /* Mengurangi padding kartu */
+        border-radius: 10px;
+    }
+
+    /* Penyesuaian Tabel */
+    .modern-table {
+        border-spacing: 0 5px; /* Jarak baris lebih rapat */
+    }
+
+    .modern-table thead th {
+        font-size: 0.7rem;
+        padding: 10px;
+    }
+
+    .modern-table tbody td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Sembunyikan kolom No (#) jika layar terlalu sempit */
+    .modern-table th:first-child,
+    .modern-table td:first-child {
+        display: none;
+    }
+
+    /* Penyesuaian Badge */
+    .code-badge {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+
+    /* Matikan efek hover JS/CSS di HP agar scrolling mulus */
+    .modern-table tbody tr:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Paginasi */
+    .custom-pagination .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2px;
+    }
+
+    /* Set ukuran dasar untuk SEMUA tombol (angka & panah) */
+    .custom-pagination .page-link {
+        padding: 0 !important; /* Nol-kan padding */
+        width: 30px; /* Lebar fix */
+        height: 30px; /* Tinggi fix */
+        font-size: 12px !important;
+        line-height: 30px; /* Agar teks vertikal di tengah */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px !important;
+    }
+
+    /* --- TRIK: Ubah Teks "Previous" Menjadi Panah "<" --- */
+    .custom-pagination .page-item:first-child .page-link {
+        font-size: 0 !important; /* Sembunyikan teks asli "Previous" */
+        position: relative;
+    }
+
+    .custom-pagination .page-item:first-child .page-link::after {
+        content: "‹"; /* Ganti dengan simbol panah kiri */
+        font-size: 18px !important; /* Ukuran panah */
+        color: #0d6efd; /* Warna biru */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -55%); /* Posisikan tepat di tengah */
+    }
+
+    /* --- TRIK: Ubah Teks "Next" Menjadi Panah ">" --- */
+    .custom-pagination .page-item:last-child .page-link {
+        font-size: 0 !important; /* Sembunyikan teks asli "Next" */
+        position: relative;
+    }
+
+    .custom-pagination .page-item:last-child .page-link::after {
+        content: "›"; /* Ganti dengan simbol panah kanan */
+        font-size: 18px !important;
+        color: #0d6efd;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -55%);
+    }
+
+    /* Ubah warna panah jika tombol disabled */
+    .custom-pagination .page-item.disabled .page-link::after {
+        color: #6c757d;
+    }
+}
