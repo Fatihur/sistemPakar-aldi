@@ -1,4 +1,4 @@
-@extends('Admin.layout.dashboard')
+@extends('admin.layout.dashboard')
 
 @section('content')
     <!--begin::App Main-->
