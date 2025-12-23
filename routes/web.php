@@ -15,10 +15,7 @@ use App\Http\Controllers\AturanController;
 use App\Http\Controllers\GejalaController;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/', function () {
-    // Arahkan langsung ke route bernama 'login'
-    return redirect()->route('login');
-});
+
 
 // Grup untuk route yang hanya bisa diakses oleh tamu (belum login)
 
