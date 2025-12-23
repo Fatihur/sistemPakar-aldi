@@ -116,10 +116,3 @@ Route::prefix('petani')->name('petani.')->group(function () {
     Route::get('/gejala', [GejalaController::class, 'index'])->name('gejala.index');
 });
 
-Route::get('/bersih-bersih', function() {
-    Artisan::call('view:clear');
-    Artisan::call('config:clear');
-    Artisan::call('cache:clear');
-    Artisan::call('route:clear');
-    return "Cache berhasil dibersihkan! Silakan coba buka halaman error tadi.";
-});
