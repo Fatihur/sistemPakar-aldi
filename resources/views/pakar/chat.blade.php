@@ -1,4 +1,8 @@
-@extends('pakar.layout.dashboard') @section('content')
+@extends('pakar.layout.dashboard') 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/media_queris_chat.css') }}">
+@endpush
+@section('content')
     <main class="app-main">
         <div class="app-content-header">
             <div class="container-fluid">

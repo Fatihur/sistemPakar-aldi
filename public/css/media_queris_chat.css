@@ -1,0 +1,113 @@
+/* ==========================================
+       STYLE UMUM (DESKTOP & DEFAULT)
+       ========================================== */
+
+/* Mempercantik Scrollbar pada kotak pesan */
+.direct-chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+.direct-chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.direct-chat-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+.direct-chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Style default untuk bubble chat agar lebih rapi */
+.direct-chat-text {
+    border-radius: 15px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Membedakan warna pesan sendiri (kanan) lebih jelas */
+.direct-chat-msg.end .direct-chat-text {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+/* ==========================================
+       MEDIA QUERIES (RESPONSIVE)
+       ========================================== */
+
+/* 1. LAYAR TABLET & HP (Max Width: 991px) */
+@media (max-width: 991.98px) {
+    .card-header .card-title {
+        font-size: 1rem; /* Mengecilkan font nama lawan bicara */
+    }
+}
+
+/* 2. LAYAR HP (Max Width: 576px) */
+@media (max-width: 576.98px) {
+    /* Merapikan Header Atas */
+    .app-content-header h3 {
+        font-size: 1.25rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .breadcrumb {
+        justify-content: center;
+        font-size: 0.85rem;
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+
+    /* Mengatur Tinggi Kotak Chat di HP */
+    /* Menggunakan !important untuk menimpa inline style 'height: 60vh' */
+    .direct-chat-messages {
+        height: 65vh !important;
+        padding: 10px;
+    }
+
+    /* Input area yang lebih besar agar mudah ditap jari */
+    .card-footer input.form-control {
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .card-footer button.btn {
+        height: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Mengatur Avatar dan Bubble agar tidak terlalu mepet */
+    .direct-chat-img {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Margin bubble disesuaikan dengan ukuran avatar baru */
+    .direct-chat-msg .direct-chat-text {
+        margin-left: 45px; /* Default biasanya 50px */
+        margin-right: 10px;
+    }
+    .direct-chat-msg.end .direct-chat-text {
+        margin-right: 45px;
+        margin-left: 10px;
+    }
+}
+
+/* 3. MODE LANDSCAPE / SAAT KEYBOARD MUNCUL (Max Height: 500px) */
+/* Penting: Saat keyboard HP muncul, tinggi layar jadi pendek */
+@media (max-height: 500px) {
+    .app-content-header {
+        display: none; /* Sembunyikan header judul agar fokus ke chat */
+    }
+
+    .direct-chat-messages {
+        height: 55vh !important; /* Kurangi tinggi agar inputan terlihat */
+    }
+
+    .card-header {
+        padding: 0.5rem; /* Perkecil padding header kartu */
+    }
+}

@@ -1,5 +1,7 @@
 @extends('petani.layout.dashboard')
-
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/media_queris_chat.css') }}">
+@endpush
 @section('content')
 <main class="app-main">
     <!-- Header Konten -->
