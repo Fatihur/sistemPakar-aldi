@@ -97,4 +97,30 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const modal = document.getElementById("obatModal");
+    const modalImg = document.getElementById("modal-obat-image");
+    const modalCaption = document.getElementById("modal-obat-caption");
+    const closeBtn = document.getElementById("closeObatModal");
+
+    document.querySelectorAll(".solution-image-clickable").forEach(img => {
+        img.onclick = () => {
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+            modalCaption.innerText = img.alt;
+            document.body.style.overflow = "hidden";
+        };
+    });
+
+    closeBtn.onclick = closeModal;
+    modal.onclick = e => e.target === modal && closeModal();
+
+    function closeModal(){
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+    }
 });

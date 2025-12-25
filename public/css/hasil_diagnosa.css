@@ -1,221 +1,198 @@
-/* Kartu Hasil Utama */
+/* =============================
+   RESULT CARD
+============================= */
 .result-card {
-    border: none;
-    border-radius: 15px;
-    background: #fff;
+    border-radius: 20px;
+    background: linear-gradient(135deg,#fff,#f4f7fb);
+    box-shadow: 0 20px 50px rgba(0,0,0,.08);
 }
 
-/* Lingkaran Persentase */
+/* =============================
+   CONFIDENCE CIRCLE
+============================= */
 .confidence-circle {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: conic-gradient(#28a745 var(--confidence, 0%), #e9ecef 0);
+    background: conic-gradient(#28a745 var(--confidence), #e9ecef 0);
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    transition: --confidence 1s ease-in-out;
-    animation: fill-circle 1s ease-out forwards;
+    justify-content: center;
+    margin: auto;
+    box-shadow: inset 0 0 20px rgba(40,167,69,.3),
+                0 0 30px rgba(40,167,69,.4);
 }
 
-@keyframes fill-circle {
-    from { --confidence: 0; }
-    to { /* Nilai akan di-set oleh JS, tapi kita set default */ }
-}
-
-.confidence-circle .confidence-value {
+.confidence-value {
     font-size: 2rem;
     font-weight: 700;
     color: #28a745;
 }
 
-.disease-name {
-    font-weight: 700;
-    color: #343a40;
-}
-
+/* =============================
+   DISEASE IMAGE
+============================= */
 .disease-image {
-    max-height: 250px;
-    width: auto;
-    object-fit: contain;
+    max-height: 260px;
+    border-radius: 15px;
+    transition: .4s;
+}
+.disease-image:hover {
+    transform: scale(1.05);
 }
 
-/* Daftar Solusi */
+/* =============================
+   SOLUTION
+============================= */
 .solution-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 1rem;
 }
-
 .solution-item {
     display: flex;
+    gap: 12px;
     align-items: center;
-    gap: 10px;
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 10px 15px;
-    flex-basis: 200px;
-    flex-grow: 1;
-}
-
-.solution-image {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    border-radius: 5px;
     background: #fff;
-    padding: 2px;
-}
-
-/* Gambar */
-.solution-image-clickable {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.solution-image-clickable:hover {
-    transform: scale(1.1);
-}
-
-.obat-modal-overlay {
-    display: none; /* Sembunyi secara default */
-    position: fixed;
-    z-index: 1060; /* Pastikan di atas segalanya */
-    left: 0;
-    top: 0;
+    padding: 12px;
+    border-radius: 12px;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.1);
+    transition: .3s;
+}
+.solution-item:hover {
+    transform: translateY(-4px);
+}
+
+/* =============================
+   IMAGE CLICK
+============================= */
+.solution-image {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* =============================
+   MODAL
+============================= */
+.obat-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    z-index: 1060;
     justify-content: center;
     align-items: center;
-    animation: fadeIn 0.3s ease;
 }
 
-.obat-modal-content {
-    position: relative;
-    text-align: center;
-}
-
-#modal-obat-image {
+.obat-modal-content img {
     max-width: 80vw;
     max-height: 80vh;
     border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    animation: zoomIn 0.3s ease;
-}
-
-#modal-obat-caption {
-    margin-top: 15px;
-    color: #ccc;
-    font-size: 1.2rem;
 }
 
 .close-obat-modal {
     position: absolute;
-    top: -15px;
-    right: 15px;
-    color: #fff;
+    top: 30px;
+    right: 40px;
+    color: white;
     font-size: 3rem;
-    font-weight: bold;
     cursor: pointer;
-    transition: color 0.3s ease;
-}
-.close-obat-modal:hover {
-    color: #bbb;
 }
 
-/* Animasi (mungkin sudah ada, tidak masalah) */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-@keyframes zoomIn {
-    from { transform: scale(0.8); }
-    to { transform: scale(1); }
+/* RESPONSIVE */
+@media(max-width:768px){
+    .confidence-circle{width:120px;height:120px}
 }
 
-/* 1. Tablet & Layar Kecil (Max Width: 768px) */
-@media (max-width: 768px) {
-    /* Menyesuaikan ukuran lingkaran agar tidak terlalu mendominasi */
+/* A. TABLET & MOBILE LANDSCAPE (Max Width: 991px) */
+@media (max-width: 991.98px) {
     .confidence-circle {
-        width: 130px;
-        height: 130px;
+        width: 120px;
+        height: 120px;
+    }
+    
+    .confidence-circle::after {
+        width: 95px;
+        height: 95px;
+    }
+    
+    .confidence-value {
+        font-size: 1.4rem;
     }
 
-    .confidence-circle .confidence-value {
-        font-size: 1.75rem;
-    }
-
-    /* Grid solusi menjadi 2 kolom (atau menyesuaikan sisa ruang) */
-    .solution-item {
-        flex-basis: 45%; /* Agar muat 2 item per baris */
+    .card-body {
+        padding: 1.5rem !important; /* Kurangi padding kartu */
     }
 }
 
-/* 2. Mobile / HP (Max Width: 576px) */
-@media (max-width: 576px) {
-    /* Lingkaran lebih kecil lagi untuk layar sempit */
-    .confidence-circle {
-        width: 110px;
-        height: 110px;
+/* B. MOBILE PHONE (Max Width: 767px) */
+@media (max-width: 767.98px) {
+    /* Layout: Beri jarak antar elemen yang stack vertikal */
+    .result-card .col-md-3,
+    .result-card .col-md-4,
+    .result-card .col-md-5 {
+        margin-bottom: 2rem;
+        border-bottom: 1px dashed #eee; /* Garis pemisah tipis */
+        padding-bottom: 1.5rem;
     }
 
-    .confidence-circle .confidence-value {
+    /* Hilangkan border/margin di elemen terakhir agar rapi */
+    .result-card .col-md-5 {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    /* Ukuran Font Judul di HP */
+    .disease-name {
         font-size: 1.5rem;
     }
 
-    /* Gambar penyakit tidak terlalu tinggi agar konten bawah terlihat */
-    .disease-image {
-        max-height: 180px;
+    .app-content-header h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px !important;
+        text-align: center;
     }
 
-    /* Daftar solusi menjadi 1 kolom penuh (stack ke bawah) */
-    .solution-item {
-        flex-basis: 100%;
-        padding: 10px; /* Sedikit mengurangi padding jika perlu */
-    }
-
-    .solution-list {
-        gap: 0.8rem;
-    }
-
-    /* Penyesuaian Modal agar tombol close mudah dipencet jari */
-    .close-obat-modal {
-        top: 10px;
-        right: 10px;
-        font-size: 2.5rem;
-        background: rgba(0, 0, 0, 0.5); /* Background agar kontras dgn gambar */
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
+    /* Breadcrumb di tengah */
+    .breadcrumb {
         justify-content: center;
-        padding-bottom: 5px; /* Visual adjustment untuk text '×' */
+        margin-bottom: 1rem;
     }
 
-    #modal-obat-image {
-        max-width: 95vw; /* Memanfaatkan lebar layar lebih banyak */
+    /* Gambar Penyakit tidak terlalu tinggi di HP */
+    .disease-image {
+        max-height: 200px;
+        width: auto;
+        max-width: 100%;
     }
 
-    #modal-obat-caption {
-        font-size: 1rem;
-        padding: 0 10px;
+    /* List Solusi */
+    .solution-item {
+        padding: 8px 10px;
+    }
+    
+    .solution-item strong {
+        font-size: 0.95rem;
     }
 }
 
-/* 3. Landscape Mode di HP (Optional - Tinggi layar pendek) */
-@media (max-height: 500px) and (orientation: landscape) {
-    .disease-image {
-        max-height: 120px; /* Kurangi tinggi gambar drastis */
-    }
-    
+/* C. LAYAR SANGAT KECIL (iPhone SE, dll - Max 400px) */
+@media (max-width: 400px) {
     .confidence-circle {
-        display: none; /* Sembunyikan lingkaran jika mengganggu view landscape */
+        width: 100px;
+        height: 100px;
+    }
+
+    .confidence-circle::after {
+        width: 80px;
+        height: 80px;
+    }
+
+    .confidence-value {
+        font-size: 1.1rem;
     }
 }
