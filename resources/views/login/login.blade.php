@@ -31,7 +31,7 @@
 
                     <div class="login-card animate-fade">
 
-                        <h3 class="text-center mb-4">Login</h3>
+                        <h3 class="text-center mb-4">Login Dulu</h3>
 
                         <!-- Alert -->
                         @if (session('success'))
