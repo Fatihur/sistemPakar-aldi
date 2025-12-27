@@ -171,44 +171,76 @@
 }
 
 /* --- 3. Mobile Portrait (max-width: 576px) --- */
-@media (max-width: 576px) {
-    
-    /* --- Tombol Aksi (Lihat, Edit, Hapus) --- */
-    /* Di layar kecil, tombol berjejer 3 akan merusak tabel.
-       Kita buat mereka menumpuk (stack) ke bawah. */
-    .table td .btn {
-        display: block;
-        width: 100%;
-        margin-bottom: 5px; /* Jarak antar tombol */
-        font-size: 0.8rem;  /* Font tombol lebih kecil */
+@media (max-width: 576.98px) {
+
+    /* --- A. Merapikan Header Card & Pencarian --- */
+    .card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
-    /* Hapus margin tombol terakhir */
-    .table td form .btn {
-        margin-bottom: 0;
-    }
-    
-    /* Pastikan kolom aksi punya lebar minimum agar tombol tidak gepeng */
-    .table th:last-child, 
-    .table td:last-child {
-        min-width: 80px;
+    .card-tools {
+        width: 100%; /* Search bar jadi full width */
+        margin-top: 5px;
     }
 
-    /* --- Paginasi --- */
-    /* Jika paginasi panjang, biarkan wrap ke baris baru */
-    .custom-pagination {
-        justify-content: center !important; /* Tengahkan paginasi */
+    .card-tools form {
+        width: 100% !important; /* Timpa inline style width: 250px */
     }
+
+    /* --- B. Custom Pagination (Previous/Next jadi < >) --- */
     
-    .pagination {
+    /* Container Paginasi: Tengah & Wrap */
+    .custom-pagination .pagination {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 5px;
     }
 
-    /* --- Select2 Create/Edit --- */
-    /* Font tag pilihan diperkecil */
-    .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
-        font-size: 0.8rem;
-        padding: 2px 5px;
+    /* Sembunyikan tulisan "Previous", "Next", atau "Showing..." */
+    .custom-pagination .page-item:first-child .page-link, 
+    .custom-pagination .page-item:last-child .page-link {
+        font-size: 0;       /* Ini kuncinya: Teks asli hilang */
+        width: 38px;        /* Lebar kotak */
+        height: 38px;       /* Tinggi kotak */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;         /* Reset padding */
+        border-radius: 6px; /* Sedikit membulat */
+    }
+
+    /* Mengubah Tombol Previous (Kiri) menjadi simbol < */
+    .custom-pagination .page-item:first-child .page-link::after {
+        content: "‹";       /* Simbol panah kiri (Single Left Angle Quote) */
+        font-size: 24px;    /* Ukuran simbol */
+        line-height: 1;
+        margin-top: -4px;   /* Penyesuaian posisi vertikal */
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Mengubah Tombol Next (Kanan) menjadi simbol > */
+    .custom-pagination .page-item:last-child .page-link::after {
+        content: "›";       /* Simbol panah kanan (Single Right Angle Quote) */
+        font-size: 24px;
+        line-height: 1;
+        margin-top: -4px;
+        display: block;
+        font-weight: bold;
+    }
+
+    /* Ukuran tombol angka (1, 2, 3...) diperkecil sedikit */
+    .custom-pagination .page-item .page-link {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Styling tombol aksi di tabel agar stack (atas-bawah) biar ga lebar */
+    .table td .btn {
+        margin-bottom: 3px;
+        display: inline-block;
     }
 }
