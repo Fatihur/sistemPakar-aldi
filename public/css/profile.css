@@ -129,85 +129,57 @@
 }
 
 
-/* 1. Untuk Tablet dan Layar Laptop Kecil (Max-width 768px) */
-@media (max-width: 768px) {
-    .profile-page-container-no-photo {
-        max-width: 95%; /* Gunakan hampir seluruh lebar layar */
-        padding: 0 10px;
-    }
-
+/* TABLET (Max Width: 991px) */
+@media (max-width: 991.98px) {
     .profile-form-card {
-        padding: 1.5rem; /* Kurangi padding dalam agar tidak terlalu boros tempat */
+        padding: 30px; /* Kurangi padding kartu */
     }
 }
 
-/* 2. Untuk Handphone / Layar Sempit (Max-width 576px) */
-@media (max-width: 576px) {
-    /* Atur ulang container */
-    .profile-page-container-no-photo {
-        margin: 1rem auto; /* Beri jarak sedikit dari atas */
-        width: 100%;
-        padding: 0 15px; /* Margin kiri kanan agar tidak nempel tepi layar */
+/* MOBILE PHONE (Max Width: 576px) */
+@media (max-width: 576.98px) {
+    /* Header: Judul & Breadcrumb Rata Tengah */
+    .app-content-header h3 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
     }
 
+    .breadcrumb {
+        justify-content: center;
+        background: transparent;
+        margin-bottom: 15px;
+    }
+
+    /* Kartu Form: Penuhi layar */
     .profile-form-card {
-        padding: 1.25rem; /* Padding lebih rapat lagi */
-        border-radius: 10px; /* Radius sudut sedikit diperkecil */
+        padding: 20px;
+        border-radius: 8px;
     }
 
     .profile-form-card h4 {
-        font-size: 1.25rem; /* Ukuran font judul disesuaikan */
-        text-align: center; /* Judul rata tengah di HP terlihat lebih rapi */
+        font-size: 1.25rem;
+        text-align: center;
     }
 
     .profile-form-card p.text-muted {
-        font-size: 0.85rem;
         text-align: center;
-        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
     }
 
-    /* Input Form */
-    .form-group {
-        margin-bottom: 1rem; /* Jarak antar input diperkecil */
+    /* Input: Pastikan mudah ditap jari */
+    .input-group input {
+        font-size: 16px; /* Mencegah zoom otomatis di iPhone */
     }
 
-    .form-group label {
-        font-size: 0.9rem; /* Label sedikit lebih kecil */
-    }
-
-    .form-group input {
-        font-size: 14px; /* Mencegah zoom otomatis pada iOS saat diklik */
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
-    }
-
-    /* Ikon di dalam input */
-    .input-group .input-group-icon, 
-    .input-group .input-group-icon-toggle {
-        font-size: 1rem; /* Sesuaikan ukuran ikon */
-    }
-
-    /* Tombol Aksi (Simpan & Batal) */
+    /* Tombol: Stack Vertikal (Atas Bawah) */
     .form-actions {
-        flex-direction: column; /* Tombol disusun ke bawah (vertikal) */
-        gap: 0.75rem; /* Jarak antar tombol */
-        margin-top: 1.5rem;
+        flex-direction: column;
+        gap: 10px;
     }
 
-    .btn {
-        width: 100%; /* Tombol menjadi lebar penuh (full width) */
-        padding: 0.8rem; /* Area sentuh lebih besar untuk jari */
-        font-size: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* Opsional: Jika ingin tombol 'Simpan' ada di atas tombol 'Batal' */
-    .btn-primary {
-        order: 1;
-    }
-    .btn-light {
-        order: 2;
+    .form-actions .btn {
+        width: 100%; /* Tombol lebar penuh */
+        padding: 12px;
     }
 }
