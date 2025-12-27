@@ -290,7 +290,7 @@
 
     /* Ganti dengan simbol panah kanan (>) */
     .custom-pagination .pagination .page-item:last-child .page-link::after {
-        content: ">"; /* Simbol HTML Single Right Angle Quote */
+        content: "›"; /* Simbol HTML Single Right Angle Quote */
         font-size: 28px;
         line-height: 1;
         margin-top: -4px;
