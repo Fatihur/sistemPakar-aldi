@@ -80,7 +80,7 @@
     max-width: 80vw;
     max-height: 80vh;
     border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     animation: zoomIn 0.3s ease;
 }
 
@@ -106,13 +106,21 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes zoomIn {
-    from { transform: scale(0.8); }
-    to { transform: scale(1); }
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
 }
 /* Kontainer utama paginasi */
 .custom-pagination .pagination {
@@ -220,7 +228,8 @@
     }
 
     /* Mengatur ulang padding cell tabel */
-    .table th, .table td {
+    .table th,
+    .table td {
         padding: 0.5rem;
         white-space: nowrap; /* Mencegah teks turun ke bawah berantakan */
     }
@@ -239,5 +248,58 @@
     /* Pagination di tengah */
     .custom-pagination {
         justify-content: center !important;
+    }
+
+    /* 1. Atur container agar angka tidak berantakan */
+    .custom-pagination .pagination {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    /* 2. Target Tombol PREVIOUS (Elemen Pertama) */
+    .custom-pagination .pagination .page-item:first-child .page-link {
+        font-size: 0; /* Hilangkan tulisan "Previous" atau "Showing..." */
+        width: 38px; /* Lebar kotak */
+        height: 38px; /* Tinggi kotak */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0; /* Hapus padding bawaan */
+    }
+
+    /* Ganti dengan simbol panah kiri (<) */
+    .custom-pagination .pagination .page-item:first-child .page-link::after {
+        content: "‹"; /* Simbol HTML Single Left Angle Quote */
+        font-size: 28px; /* Ukuran simbol */
+        line-height: 1;
+        margin-top: -4px; /* Penyesuaian vertikal */
+        display: block;
+    }
+
+    /* 3. Target Tombol NEXT (Elemen Terakhir) */
+    .custom-pagination .pagination .page-item:last-child .page-link {
+        font-size: 0; /* Hilangkan tulisan "Next" */
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+
+    /* Ganti dengan simbol panah kanan (>) */
+    .custom-pagination .pagination .page-item:last-child .page-link::after {
+        content: "›"; /* Simbol HTML Single Right Angle Quote */
+        font-size: 28px;
+        line-height: 1;
+        margin-top: -4px;
+        display: block;
+    }
+
+    /* 4. Perkecil tombol angka halaman agar muat di layar kecil */
+    .custom-pagination .pagination .page-item .page-link {
+        padding: 6px 10px;
+        font-size: 0.85rem;
     }
 }
