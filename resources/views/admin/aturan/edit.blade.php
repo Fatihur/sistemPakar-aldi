@@ -1,219 +1,231 @@
 @extends('admin.layout.dashboard')
 
 @push('styles')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/aturan_admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/create_aturan_admin.css') }}">
+    <style>
+        .section-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .card-modern {
+            border: 0;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
+        }
+
+        /* Tambahan agar gambar preview rapi */
+        .img-preview-edit {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            padding: 2px;
+        }
+    </style>
 @endpush
 
 @section('content')
     <main class="app-main">
-        {{-- ... (Header Konten) ... --}}
+
         <div class="app-content-header">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3 class="mb-0">Edit Aturan</h3>
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <div>
+                        <h3 class="mb-1">Edit Penyakit & Aturan</h3>
+                        <p class="text-muted mb-0">
+                            Perbarui data penyakit: <span class="fw-bold text-primary">{{ $penyakit->nama_penyakit }}</span>
+                        </p>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor Admin</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.aturan.index') }}">Aturan</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit</li>
-                        </ol>
-                    </div>
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('admin.aturan.index') }}">Aturan</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
                 </div>
             </div>
         </div>
+
         <div class="app-content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    Edit Aturan untuk: <span class="fw-bold text-danger">{{ $penyakit->kode }} -
-                                        {{ $penyakit->nama_penyakit }}</span>
-                                </h3>
-                            </div>
 
-                            <form action="{{ route('admin.aturan.update', $penyakit->id) }}" method="POST"
-                                enctype="multipart/form-data">@csrf
+                <form action="{{ route('admin.aturan.update', $penyakit->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-                                @method('PUT') <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label for="kode" class="form-label">Kode Penyakit <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text" class="form-control @error('kode') is-invalid @enderror"
-                                                id="kode" name="kode" value="{{ old('kode', $penyakit->kode) }}"
-                                                >
-                                            @error('kode')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-5 mb-3">
-                                            <label for="nama_penyakit" class="form-label">Nama Penyakit <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="text"
-                                                class="form-control @error('nama_penyakit') is-invalid @enderror"
-                                                id="nama_penyakit" name="nama_penyakit"
-                                                value="{{ old('nama_penyakit', $penyakit->nama_penyakit) }}" >
-                                            @error('nama_penyakit')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="gambar" class="form-label">Upload Gambar Baru (Opsional)</label>
-                                            <input type="file" class="form-control @error('gambar') is-invalid @enderror"
-                                                id="gambar" name="gambar" accept="image/*">
-                                            <small class="text-muted">Kosongkan jika tidak ingin mengubah.</small>
+                    <div class="card card-modern mb-4">
+                        <div class="card-body">
+                            <h6 class="section-title mb-3">
+                                <i class="bi bi-bug-fill text-danger"></i>
+                                Informasi Penyakit
+                            </h6>
+
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">Kode Penyakit *</label>
+                                    <input type="text" name="kode"
+                                        class="form-control @error('kode') is-invalid @enderror"
+                                        value="{{ old('kode', $penyakit->kode) }}">
+                                    @error('kode')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-5">
+                                    <label class="form-label">Nama Penyakit *</label>
+                                    <input type="text" name="nama_penyakit"
+                                        class="form-control @error('nama_penyakit') is-invalid @enderror"
+                                        value="{{ old('nama_penyakit', $penyakit->nama_penyakit) }}">
+                                    @error('nama_penyakit')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label">Gambar Penyakit (Opsional)</label>
+                                    <div class="d-flex gap-3 align-items-start">
+                                        @if ($penyakit->gambar)
+                                            <img src="{{ asset($penyakit->gambar) }}" alt="Preview"
+                                                class="img-preview-edit">
+                                        @endif
+                                        <div class="w-100">
+                                            <input type="file" name="gambar"
+                                                class="form-control @error('gambar') is-invalid @enderror" accept="image/*">
+                                            <small class="text-muted d-block mt-1">Biarkan kosong jika tidak ingin mengubah
+                                                gambar.</small>
                                             @error('gambar')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-
-                                            @if ($penyakit->gambar)
-                                                <div class="mt-2">
-                                                    <label class="form-label d-block">Gambar Saat Ini:</label>
-                                                    <img src="{{ asset($penyakit->gambar) }}"
-                                                        alt="{{ $penyakit->nama_penyakit }}"
-                                                        style="width: 100px; height: 60px; object-fit: cover; border-radius: 5px;">
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Pilih Gejala (Aturan) <span
-                                                    class="text-danger">*</span></label>
-                                            <button type="button" class="btn btn-success btn-sm float-end mb-2"
-                                                data-bs-toggle="modal" data-bs-target="#modalTambahGejala"
-                                                data-url="{{ route('admin.aturan.storeGejalaAjax') }}">
-                                                <i class="bi bi-plus-circle"></i> Gejala Baru
-                                            </button>
-
-                                            <div class="symptom-grid-wrapper @error('gejala_ids') is-invalid @enderror">
-                                                <div id="gejala-grid-container" class="symptom-grid">
-                                                    @foreach ($semuaGejala as $gejala)
-                                                        @php $isChecked = in_array($gejala->id, $gejalaDimiliki); @endphp
-                                                        <label class="symptom-card {{ $isChecked ? 'checked' : '' }}">
-                                                            <input type="checkbox" name="gejala_ids[]"
-                                                                value="{{ $gejala->id }}"
-                                                                {{ $isChecked ? 'checked' : '' }}>
-                                                            <div class="symptom-content">
-                                                                <div class="symptom-code">{{ $gejala->kode }}</div>
-                                                                <div class="symptom-desc">{{ $gejala->gejala }}</div>
-                                                            </div>
-                                                        </label>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            @error('gejala_ids')
-                                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Pilih Solusi Penanganan <span
-                                                    class="text-danger">*</span></label>
-                                            <button type="button" class="btn btn-success btn-sm float-end mb-2"
-                                                data-bs-toggle="modal" data-bs-target="#modalTambahSolusi"
-                                                data-url="{{ route('admin.aturan.storeSolusiAjax') }}">
-                                                <i class="bi bi-plus-circle"></i> Obat Baru
-                                            </button>
-
-                                            <div class="symptom-grid-wrapper @error('solusi_ids') is-invalid @enderror">
-                                                <div id="solusi-grid-container" class="symptom-grid">
-                                                    @foreach ($semuaSolusi as $solusi)
-                                                        @php $isChecked = in_array($solusi->id, $solusiDimiliki); @endphp
-                                                        <label class="symptom-card {{ $isChecked ? 'checked' : '' }}">
-                                                            <input type="checkbox" name="solusi_ids[]"
-                                                                value="{{ $solusi->id }}"
-                                                                {{ $isChecked ? 'checked' : '' }}>
-                                                            <div class="symptom-content">
-                                                                <div class="symptom-code">{{ $solusi->kode }}</div>
-                                                                <div class="symptom-desc">{{ $solusi->nama_obat }}</div>
-                                                            </div>
-                                                        </label>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            @error('solusi_ids')
-                                                <div class="invalid-feedback d-block">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Simpan
-                                        Perubahan</button>
-                                    <a href="{{ route('admin.aturan.index') }}" class="btn btn-secondary">Batal</a>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="card card-modern mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="section-title mb-0">
+                                    <i class="bi bi-clipboard2-pulse-fill text-primary"></i>
+                                    Gejala (Aturan)
+                                </h6>
+                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#modalTambahGejala">
+                                    <i class="bi bi-plus-circle"></i> Gejala Baru
+                                </button>
+                            </div>
+
+                            <div class="symptom-grid-wrapper @error('gejala_ids') is-invalid @enderror">
+                                <div class="symptom-grid">
+                                    @foreach ($semuaGejala as $gejala)
+                                        @php $isChecked = in_array($gejala->id, $gejalaDimiliki); @endphp
+                                        <label class="symptom-card">
+                                            <input type="checkbox" name="gejala_ids[]" value="{{ $gejala->id }}"
+                                                {{ $isChecked ? 'checked' : '' }}>
+                                            <div class="symptom-content">
+                                                <div class="symptom-code">{{ $gejala->kode }}</div>
+                                                <div class="symptom-desc">{{ $gejala->gejala }}</div>
+                                            </div>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @error('gejala_ids')
+                                <div class="invalid-feedback d-block mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="card card-modern mb-4">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="section-title mb-0">
+                                    <i class="bi bi-shield-check-fill text-success"></i>
+                                    Solusi Penanganan
+                                </h6>
+                                <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#modalTambahSolusi">
+                                    <i class="bi bi-plus-circle"></i> Obat Baru
+                                </button>
+                            </div>
+
+                            <div class="symptom-grid-wrapper @error('solusi_ids') is-invalid @enderror">
+                                <div class="symptom-grid">
+                                    @foreach ($semuaSolusi as $solusi)
+                                        @php $isChecked = in_array($solusi->id, $solusiDimiliki); @endphp
+                                        <label class="symptom-card">
+                                            <input type="checkbox" name="solusi_ids[]" value="{{ $solusi->id }}"
+                                                {{ $isChecked ? 'checked' : '' }}>
+                                            <div class="symptom-content">
+                                                <div class="symptom-code">{{ $solusi->kode }}</div>
+                                                <div class="symptom-desc">{{ $solusi->nama_obat }}</div>
+                                            </div>
+                                        </label>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @error('solusi_ids')
+                                <div class="invalid-feedback d-block mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mb-5">
+                        <a href="{{ route('admin.aturan.index') }}" class="btn btn-light px-4">
+                            Batal
+                        </a>
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-save-fill"></i> Simpan Perubahan
+                        </button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </main>
+@endsection
 
-    <div class="modal fade" id="modalTambahGejala" tabindex="-1" aria-labelledby="modalTambahGejalaLabel"
-        aria-hidden="true">
+@push('modals')
+    <div class="modal fade" id="modalTambahGejala" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalTambahGejalaLabel">Tambah Gejala Baru</h5>
+                    <h5 class="modal-title">Tambah Gejala Baru (AJAX)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formTambahGejala">
                         @csrf
-                        <!-- Input Kode Gejala -->
                         <div class="mb-3">
-                            <label for="gejala_kode" class="form-label">Kode Gejala (cth: G28)</label>
-                            <input type="text" class="form-control" id="gejala_kode" name="kode" 
-                                placeholder="Masukkan kode">
-                            <div class="invalid-feedback" id="error_gejala_kode"></div>
+                            <label class="form-label">Kode Gejala</label>
+                            <input type="text" class="form-control" name="kode" placeholder="Contoh: G01">
+                            <div class="invalid-feedback error-text code_error"></div>
                         </div>
-
-                        <!-- Input Nama Gejala -->
                         <div class="mb-3">
-                            <label for="gejala_nama" class="form-label">Nama Gejala</label>
-                            <input type="text" class="form-control" id="gejala_nama" name="gejala" 
-                                placeholder="Masukkan nama gejala">
-                            <div class="invalid-feedback" id="error_gejala_nama"></div>
-                        </div>
-
-                        <!-- Input Kategori (Bagian Tanaman) - BARU -->
-                        <div class="mb-3">
-                            <label for="gejala_bagian" class="form-label">Bagian Tanaman / Kategori</label>
-                            <select class="form-select" id="gejala_bagian" name="bagian" >
-                                <option value="" selected disabled>-- Pilih Kategori Gejala --</option>
-                                <option value="daun">Gejala pada daun</option>
-                                <option value="batang_pucuk">Gejala pada batang & pucuk</option>
-                                <option value="biji_gabah">Gejala pada biji dan gabah</option>
-                                <option value="umum">Gejala umum pada tanaman</option>
-                            </select>
-                            <div class="invalid-feedback" id="error_gejala_bagian"></div>
+                            <label class="form-label">Nama Gejala</label>
+                            <textarea class="form-control" name="gejala" rows="3" placeholder="Deskripsi gejala..."></textarea>
+                            <div class="invalid-feedback error-text name_error"></div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <!-- Pastikan data-url diisi dengan route yang sesuai -->
-                    <button type="button" class="btn btn-primary" id="btnSimpanGejala"
-                        data-url="{{ route('admin.gejala.store.ajax') }}">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-success" id="btnSimpanGejala"
+                        data-url="{{ route('admin.aturan.storeGejalaAjax') }}">
                         Simpan Gejala
                     </button>
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
-@push('modals')
     <div class="modal fade" id="modalTambahSolusi" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -225,29 +237,28 @@
                     <form id="formTambahSolusi" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="solusi_kode" class="form-label">Kode Solusi</label>
-                            <input type="text" class="form-control" id="solusi_kode" name="kode" >
-                            <div class="invalid-feedback" id="error_solusi_kode"></div>
+                            <label class="form-label">Kode Solusi</label>
+                            <input type="text" class="form-control" name="kode" placeholder="Contoh: S01">
+                            <div class="invalid-feedback error-text code_error"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="solusi_nama" class="form-label">Nama Obat</label>
-                            <input type="text" class="form-control" id="solusi_nama" name="nama_obat" >
-                            <div class="invalid-feedback" id="error_solusi_nama"></div>
+                            <label class="form-label">Nama Obat/Solusi</label>
+                            <input type="text" class="form-control" name="nama_obat">
+                            <div class="invalid-feedback error-text name_error"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="solusi_gambar" class="form-label">Gambar</label>
-                            <input type="file" class="form-control" id="solusi_gambar" name="gambar"
-                                accept="image/*">
-                            <div class="invalid-feedback" id="error_solusi_gambar"></div>
-                            <div class="mt-2 d-none" id="preview-container">
-                                <p class="text-muted small mb-1">Preview:</p>
+                            <label class="form-label">Gambar (Opsional)</label>
+                            <input type="file" class="form-control" name="gambar" accept="image/*"
+                                onchange="previewModalImage(this)">
+                            <div class="invalid-feedback error-text image_error"></div>
 
-                                <img src="" id="img-preview" class="img-thumbnail" style="max-height: 100px;">
+                            <div class="mt-2 d-none" id="preview-container-solusi">
+                                <img src="" id="img-preview-solusi" class="img-thumbnail"
+                                    style="max-height: 100px; object-fit: cover;">
                             </div>
                         </div>
-
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -263,7 +274,5 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script src="{{ asset('js/aturan_admin.js') }}"></script>
 @endpush

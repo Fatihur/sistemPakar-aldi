@@ -6,8 +6,6 @@
     <title>Register | Sistem Pakar Penyakit Padi</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" type="image/png" href="{{ asset('obat/logo.png') }}" />
-
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -15,8 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
@@ -77,13 +74,16 @@
 
                         <!-- Password -->
                         <div class="form-floating mb-3 position-relative">
-                            <input type="password" id="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" placeholder="Password">
-                            <label><i class="bi bi-lock"></i> Password</label>
+                            <div class="form-floating position-relative">
+                                <input type="password" id="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                                <label><i class="bi bi-lock"></i> Password</label>
 
-                            <span class="eye-toggle" onclick="togglePassword('password', this)">
-                                <i class="bi bi-eye-slash-fill"></i>
-                            </span>
+                                <span class="eye-toggle" onclick="togglePassword('password', this)">
+                                    <i class="bi bi-eye-slash-fill"></i>
+                                </span>
+                            </div>
+
 
                             @error('password')
                                 <div class="text-danger small mt-1">{{ $message }}</div>

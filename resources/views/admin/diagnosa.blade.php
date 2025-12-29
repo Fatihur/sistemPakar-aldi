@@ -1,126 +1,163 @@
 @extends('admin.layout.dashboard')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/diagnosa.css') }}">
+<link rel="stylesheet" href="{{ asset('css/diagnosa.css') }}">
 @endpush
 
 @section('content')
 <main class="app-main">
+    <!-- HEADER -->
     <div class="app-content-header">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Mulai Diagnosis Hama & Penyakit</h3>
+                    <h3 class="fw-bold mb-0">Mulai Diagnosis</h3>
+                    <small class="text-muted">Deteksi Hama & Penyakit Tanaman Padi</small>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Dasbor Admin</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Diagnosis</li>
+                        <li class="breadcrumb-item active">Diagnosis</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- CONTENT -->
     <div class="app-content">
         <div class="container-fluid">
+
             @if (session('error'))
-                <div class="alert alert-danger" role="alert">
-                    {{ session('error') }}
-                </div>
+                <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
 
             <div class="row">
                 <div class="col-12">
-                    <div class="card wizard-card">
-                        
-                        <div class="progress-container">
-                            <div class="progress-bar" id="progressBar"></div>
+                    <div class="diagnosa-wizard-card">
+
+                        <!-- PROGRESS -->
+                        <div class="wizard-progress">
+                            <div class="wizard-progress-bar" id="progressBar">0%</div>
                         </div>
 
                         <form id="diagnosa-form" action="{{ route('admin.diagnosa.calculate') }}" method="POST">
                             @csrf
 
-                            <div class="wizard-step" data-step-name="Gejala Daun">
-                                <h4 class="step-title"><i class="bi bi-person-circle"></i> Gejala pada Daun</h4>
-                                <p class="step-subtitle">Pilih semua gejala yang Anda lihat pada daun tanaman padi Anda.</p>
+                            <!-- STEP 1 -->
+                            <div class="wizard-step active" data-step-name="Daun">
+                                <h4 class="step-title">
+                                    <i class="bi bi-leaf me-2"></i> Gejala pada Daun
+                                </h4>
+                                <p class="step-subtitle">Pilih gejala yang muncul pada daun tanaman.</p>
+
                                 <div class="symptom-grid">
                                     @foreach ($gejalaDaun as $gejala)
                                         <label class="symptom-card">
                                             <input type="checkbox" name="gejala[]" value="{{ $gejala->kode }}">
-                                            <div class="symptom-content">
-                                                <div class="symptom-icon"><i class="bi bi-border-style"></i></div>
-                                                <div class="symptom-code">{{ $gejala->kode }}</div>
-                                                <div class="symptom-desc">{{ Str::limit($gejala->gejala, 100) }}</div>
+                                            <div class="symptom-body">
+                                                <div class="icon"><i class="bi bi-border-style"></i></div>
+                                                <span class="code">{{ $gejala->kode }}</span>
+                                                <p>{{ Str::limit($gejala->gejala, 90) }}</p>
                                             </div>
                                         </label>
                                     @endforeach
                                 </div>
-                                <div class="wizard-navigation">
-                                    <button type="button" class="btn btn-primary next-step">Berikutnya <i class="bi bi-arrow-right"></i></button>
+
+                                <div class="wizard-nav">
+                                    <button type="button" class="btn btn-primary next-step">
+                                        Lanjut <i class="bi bi-arrow-right"></i>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="wizard-step" data-step-name="Gejala Batang">
-                                <h4 class="step-title"><i class="bi bi-person-circle"></i> Gejala pada Batang & Pucuk</h4>
-                                <p class="step-subtitle">Periksa bagian batang dan pucuk tanaman.</p>
+                            <!-- STEP 2 -->
+                            <div class="wizard-step" data-step-name="Batang">
+                                <h4 class="step-title">
+                                    <i class="bi bi-tree me-2"></i> Gejala Batang & Pucuk
+                                </h4>
+                                <p class="step-subtitle">Perhatikan batang dan pucuk tanaman.</p>
+
                                 <div class="symptom-grid">
                                     @foreach ($gejalaBatang as $gejala)
                                         <label class="symptom-card">
                                             <input type="checkbox" name="gejala[]" value="{{ $gejala->kode }}">
-                                            <div class="symptom-content">
-                                                <div class="symptom-icon"><i class="bi bi-graph-down-arrow"></i></div>
-                                                <div class="symptom-code">{{ $gejala->kode }}</div>
-                                                <div class="symptom-desc">{{ Str::limit($gejala->gejala, 40) }}</div>
+                                            <div class="symptom-body">
+                                                <div class="icon"><i class="bi bi-graph-down-arrow"></i></div>
+                                                <span class="code">{{ $gejala->kode }}</span>
+                                                <p>{{ Str::limit($gejala->gejala, 70) }}</p>
                                             </div>
                                         </label>
                                     @endforeach
                                 </div>
-                                <div class="wizard-navigation">
-                                    <button type="button" class="btn btn-secondary prev-step"><i class="bi bi-arrow-left"></i> Sebelumnya</button>
-                                    <button type="button" class="btn btn-primary next-step">Berikutnya <i class="bi bi-arrow-right"></i></button>
+
+                                <div class="wizard-nav">
+                                    <button type="button" class="btn btn-light prev-step">
+                                        <i class="bi bi-arrow-left"></i> Kembali
+                                    </button>
+                                    <button type="button" class="btn btn-primary next-step">
+                                        Lanjut <i class="bi bi-arrow-right"></i>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="wizard-step" data-step-name="Gejala Biji">
-                                <h4 class="step-title"><i class="bi bi-person-circle"></i> Gejala pada Biji & Gabah</h4>
-                                <p class="step-subtitle">Bagaimana kondisi biji atau gabah (jika sudah ada)?</p>
+                            <!-- STEP 3 -->
+                            <div class="wizard-step" data-step-name="Biji">
+                                <h4 class="step-title">
+                                    <i class="bi bi-grid-3x3-gap me-2"></i> Gejala Biji / Gabah
+                                </h4>
+                                <p class="step-subtitle">Kondisi biji jika sudah terbentuk.</p>
+
                                 <div class="symptom-grid">
                                     @foreach ($gejalaBiji as $gejala)
                                         <label class="symptom-card">
                                             <input type="checkbox" name="gejala[]" value="{{ $gejala->kode }}">
-                                            <div class="symptom-content">
-                                                <div class="symptom-icon"><i class="bi bi-x-diamond"></i></div>
-                                                <div class="symptom-code">{{ $gejala->kode }}</div>
-                                                <div class="symptom-desc">{{ Str::limit($gejala->gejala, 40) }}</div>
+                                            <div class="symptom-body">
+                                                <div class="icon"><i class="bi bi-x-diamond"></i></div>
+                                                <span class="code">{{ $gejala->kode }}</span>
+                                                <p>{{ Str::limit($gejala->gejala, 70) }}</p>
                                             </div>
                                         </label>
                                     @endforeach
                                 </div>
-                                <div class="wizard-navigation">
-                                    <button type="button" class="btn btn-secondary prev-step"><i class="bi bi-arrow-left"></i> Sebelumnya</button>
-                                    <button type="button" class="btn btn-primary next-step">Berikutnya <i class="bi bi-arrow-right"></i></button>
+
+                                <div class="wizard-nav">
+                                    <button type="button" class="btn btn-light prev-step">
+                                        <i class="bi bi-arrow-left"></i> Kembali
+                                    </button>
+                                    <button type="button" class="btn btn-primary next-step">
+                                        Lanjut <i class="bi bi-arrow-right"></i>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div class="wizard-step" data-step-name="Gejala Umum">
-                                <h4 class="step-title"><i class="bi bi-person-circle"></i> Gejala Umum Tanaman</h4>
-                                <p class="step-subtitle">Bagaimana kondisi tanaman Anda secara keseluruhan?</p>
+                            <!-- STEP 4 -->
+                            <div class="wizard-step" data-step-name="Umum">
+                                <h4 class="step-title">
+                                    <i class="bi bi-exclamation-triangle me-2"></i> Gejala Umum
+                                </h4>
+                                <p class="step-subtitle">Kondisi tanaman secara keseluruhan.</p>
+
                                 <div class="symptom-grid">
                                     @foreach ($gejalaUmum as $gejala)
                                         <label class="symptom-card">
                                             <input type="checkbox" name="gejala[]" value="{{ $gejala->kode }}">
-                                            <div class="symptom-content">
-                                                <div class="symptom-icon"><i class="bi bi-exclamation-triangle"></i></div>
-                                                <div class="symptom-code">{{ $gejala->kode }}</div>
-                                                <div class="symptom-desc">{{ Str::limit($gejala->gejala, 40) }}</div>
+                                            <div class="symptom-body">
+                                                <div class="icon"><i class="bi bi-exclamation-circle"></i></div>
+                                                <span class="code">{{ $gejala->kode }}</span>
+                                                <p>{{ Str::limit($gejala->gejala, 70) }}</p>
                                             </div>
                                         </label>
                                     @endforeach
                                 </div>
-                                <div class="wizard-navigation">
-                                    <button type="button" class="btn btn-secondary prev-step"><i class="bi bi-arrow-left"></i> Sebelumnya</button>
-                                    <button type="submit" class="btn btn-success submit-btn"><i class="bi bi-search"></i> Diagnosa Sekarang!</button>
+
+                                <div class="wizard-nav">
+                                    <button type="button" class="btn btn-light prev-step">
+                                        <i class="bi bi-arrow-left"></i> Kembali
+                                    </button>
+                                    <button type="submit" class="btn btn-success px-4">
+                                        <i class="bi bi-search"></i> Diagnosa Sekarang
+                                    </button>
                                 </div>
                             </div>
 
@@ -134,5 +171,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/diagnosa.js') }}"></script>
+<script src="{{ asset('js/diagnosa.js') }}"></script>
 @endpush

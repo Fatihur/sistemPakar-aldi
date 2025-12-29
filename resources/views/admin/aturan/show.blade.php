@@ -1,137 +1,129 @@
 @extends('admin.layout.dashboard')
 
 @push('styles')
-    <style>
-        .detail-card .card-header {
-            background-color: #f8f9fa;
-        }
-        .disease-image-detail {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid #dee2e6;
-        }
-        .list-group-item .badge {
-            font-size: 0.9rem;
-            width: 60px; /* Ratakan badge */
-            text-align: center;
-        }
-        .solution-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .solution-item:last-child {
-            border-bottom: none;
-        }
-        .solution-image {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            border-radius: 5px;
-            background: #fff;
-            border: 1px solid #eee;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/aturan_show.css') }}">
 @endpush
 
 @section('content')
 <main class="app-main">
+
+    <!-- HEADER -->
     <div class="app-content-header">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="mb-0">Detail Basis Pengetahuan</h3>
+            <div class="detail-header">
+                <div>
+                    <span class="badge badge-kode-lg">{{ $penyakit->kode }}</span>
+                    <h2 class="detail-title">{{ $penyakit->nama_penyakit }}</h2>
+                    <p class="text-muted mb-0">
+                        Detail basis pengetahuan penyakit & aturan terkait
+                    </p>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor Admin</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.aturan.index') }}">Aturan</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Detail</li>
-                    </ol>
+
+                <div class="detail-actions">
+                    <a href="{{ route('admin.aturan.edit', $penyakit->id) }}" class="btn btn-primary btn-modern">
+                        <i class="bi bi-pencil-square"></i> Edit Aturan
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- CONTENT -->
     <div class="app-content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="card detail-card">
-                        <div class="card-header">
-                            <h3 class="card-title">Detail Penyakit</h3>
-                            <div class="card-tools">
-                                <a href="{{ route('admin.aturan.edit', $penyakit->id) }}" class="btn btn-sm btn-info">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                            </div>
-                        </div>
+            <div class="row g-4">
+
+                <!-- LEFT -->
+                <div class="col-lg-4">
+                    <div class="card card-modern text-center">
                         <div class="card-body">
+
                             @if ($penyakit->gambar)
-                                <img src="{{ asset($penyakit->gambar) }}" alt="{{ $penyakit->nama_penyakit }}" class="disease-image-detail mb-3">
+                                <img src="{{ asset($penyakit->gambar) }}"
+                                    class="disease-image-modern"
+                                    alt="{{ $penyakit->nama_penyakit }}">
+                            @else
+                                <div class="image-placeholder">
+                                    <i class="bi bi-image"></i>
+                                </div>
                             @endif
-                            
-                            <h3>
-                                <span class="badge bg-danger">{{ $penyakit->kode }}</span>
-                                {{ $penyakit->nama_penyakit }}
-                            </h3>
+
                             <hr>
-                            <strong><i class="bi bi-calculator-fill"></i> Probabilitas (P(c)):</strong>
-                            <p class="text-muted fs-5">
-                                {{ number_format($penyakit->p_c * 100, 4) }} % 
-                                (Nilai: {{ $penyakit->p_c }})
-                            </p>
+
+                            <div class="probability-box">
+                                <span>Probabilitas Penyakit</span>
+                                <h3>{{ number_format($penyakit->p_c * 100, 4) }}%</h3>
+                                <small class="text-muted">
+                                    Nilai P(c): {{ $penyakit->p_c }}
+                                </small>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-7">
-                    <div class="card detail-card mb-4">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="bi bi-clipboard2-pulse-fill text-primary"></i> Gejala Terhubung (Aturan)</h3>
+                <!-- RIGHT -->
+                <div class="col-lg-8">
+
+                    <!-- GEJALA -->
+                    <div class="card card-modern mb-4">
+                        <div class="card-header-modern">
+                            <i class="bi bi-clipboard2-pulse"></i>
+                            Gejala Terhubung
                         </div>
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush">
+                        <div class="card-body">
+                            <div class="gejala-pills">
                                 @forelse ($penyakit->gejalas->sortBy('kode') as $gejala)
-                                    <li class="list-group-item">
-                                        <span class="badge bg-secondary me-2">{{ $gejala->kode }}</span>
+                                    <span class="gejala-pill">
+                                        <span class="kode">{{ $gejala->kode }}</span>
                                         {{ $gejala->gejala }}
-                                    </li>
+                                    </span>
                                 @empty
-                                    <li class="list-group-item text-muted">Belum ada gejala terhubung.</li>
+                                    <p class="text-muted fst-italic">
+                                        Belum ada gejala terhubung.
+                                    </p>
                                 @endforelse
-                            </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card detail-card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="bi bi-shield-check-fill text-success"></i> Solusi Terhubung</h3>
+                    <!-- SOLUSI -->
+                    <div class="card card-modern">
+                        <div class="card-header-modern success">
+                            <i class="bi bi-shield-check"></i>
+                            Solusi & Penanganan
                         </div>
-                        <div class="card-body p-0">
-                            <div class="solution-list">
+                        <div class="card-body">
+                            <div class="solution-modern-list">
                                 @forelse ($penyakit->solusis->sortBy('kode') as $solusi)
-                                    <div class="solution-item">
+                                    <div class="solution-modern-item">
                                         @if ($solusi->gambar_obat)
-                                            <img src="{{ asset($solusi->gambar_obat) }}" alt="{{ $solusi->nama_obat }}" class="solution-image">
+                                            <img src="{{ asset($solusi->gambar_obat) }}"
+                                                alt="{{ $solusi->nama_obat }}">
+                                        @else
+                                            <div class="solution-placeholder">
+                                                <i class="bi bi-capsule"></i>
+                                            </div>
                                         @endif
+
                                         <div>
-                                            <strong>{{ $solusi->nama_obat }}</strong>
-                                            (<span class="text-primary">{{ $solusi->kode }}</span>)
+                                            <h6>{{ $solusi->nama_obat }}</h6>
+                                            <span class="badge badge-solusi">
+                                                {{ $solusi->kode }}
+                                            </span>
                                         </div>
                                     </div>
                                 @empty
-                                    <div class="p-3 text-muted">Belum ada solusi terhubung.</div>
+                                    <p class="text-muted fst-italic">
+                                        Belum ada solusi terhubung.
+                                    </p>
                                 @endforelse
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
     </div>

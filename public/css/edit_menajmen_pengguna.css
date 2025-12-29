@@ -1,0 +1,61 @@
+/* --- Mobile Devices (Max Width 576px) --- */
+@media (max-width: 576px) {
+    
+    /* 1. Header Adjustment */
+    .app-content-header .row {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .breadcrumb {
+        justify-content: center; /* Tengahkan breadcrumb di HP */
+    }
+    
+    .breadcrumb .float-sm-end {
+        float: none !important;
+    }
+
+    /* 2. Card Spacing */
+    .card-body.p-4 {
+        padding: 1.25rem !important; /* Kurangi padding card agar tidak sempit */
+    }
+
+    /* 3. Typography & Inputs */
+    h3 {
+        font-size: 1.5rem; /* Perkecil judul */
+    }
+
+    .form-control, .form-select {
+        font-size: 16px; /* Mencegah auto-zoom pada iOS Safari */
+    }
+
+    /* 4. Action Buttons Stacked */
+    .d-flex.justify-content-end {
+        flex-direction: column-reverse; /* Tombol 'Simpan' di atas, 'Batal' di bawah */
+        width: 100%;
+        gap: 10px !important;
+    }
+
+    .btn {
+        width: 100%; /* Tombol full width agar mudah dipencet */
+        padding: 12px;
+    }
+
+    /* 5. Jarak antar input kolom */
+    .col-md-6 {
+        margin-bottom: 10px;
+    }
+}
+
+/* --- Tablet Devices (576px - 991px) --- */
+@media (min-width: 576.01px) and (max-width: 991.98px) {
+    .col-lg-9 {
+        width: 100%; /* Gunakan lebar penuh pada tablet */
+    }
+    
+    /* Tombol tetap di kanan tapi sedikit lebih besar */
+    .btn {
+        padding: 0.7rem 1.5rem;
+    }
+}

@@ -1,222 +1,177 @@
-/* Gaya Kartu Wizard Utama */
-.wizard-card {
+/* ===== WIZARD CARD ===== */
+.diagnosa-wizard-card {
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 18px;
     padding: 2rem;
-    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,.08);
 }
 
-/* Progress Bar */
-.progress-container {
-    width: 100%;
-    background-color: #e9ecef;
-    border-radius: 25px;
+/* ===== PROGRESS ===== */
+.wizard-progress {
+    background: #e9ecef;
+    border-radius: 50px;
+    overflow: hidden;
     margin-bottom: 2rem;
 }
 
-.progress-bar {
-    width: 0%; /* Dimulai dari 0 */
-    height: 20px;
-    background-color: #007bff;
-    border-radius: 25px;
-    transition: width 0.4s ease-in-out;
+.wizard-progress-bar {
+    width: 0%;
+    height: 18px;
+    background: linear-gradient(90deg, #0d6efd, #20c997);
+    color: #fff;
+    font-size: 12px;
     text-align: center;
-    color: white;
-    font-weight: bold;
+    transition: width .4s ease;
 }
 
-/* Langkah Wizard */
+/* ===== STEP ===== */
 .wizard-step {
-    display: none; /* Sembunyikan semua langkah secara default */
-    animation: fadeIn 0.5s ease;
+    display: none;
+    animation: fadeUp .4s ease;
+}
+.wizard-step.active {
+    display: block;
 }
 
-.wizard-step.active {
-    display: block; /* Tampilkan hanya langkah yang aktif */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .step-title {
     font-weight: 700;
-    color: #343a40;
 }
-
 .step-subtitle {
-    font-size: 1rem;
     color: #6c757d;
     margin-bottom: 2rem;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Grid Gejala */
+/* ===== GRID ===== */
 .symptom-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 1.25rem;
 }
 
-/* Kartu Gejala (Bagian Penting) */
+/* ===== SYMPTOM CARD ===== */
 .symptom-card {
-    border: 2px solid #dee2e6;
-    border-radius: 10px;
-    padding: 1.5rem 1rem;
-    text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    background: #fafafa;
 }
-
-.symptom-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Sembunyikan checkbox asli */
-.symptom-card input[type="checkbox"] {
+.symptom-card input {
     display: none;
 }
 
-.symptom-content .symptom-icon {
-    font-size: 2.5rem;
-    color: #007bff;
-    margin-bottom: 1rem;
+.symptom-body {
+    height: 100%;
+    border-radius: 14px;
+    padding: 1.2rem 1rem;
+    background: #f8f9fa;
+    border: 2px solid transparent;
+    text-align: center;
+    transition: .3s;
 }
 
-.symptom-content .symptom-code {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #6c757d;
-    background: #e9ecef;
-    border-radius: 25px;
-    padding: 2px 8px;
+.symptom-body .icon {
+    font-size: 2.2rem;
+    color: #0d6efd;
+    margin-bottom: .5rem;
+}
+
+.symptom-body .code {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    background: #dee2e6;
+    border-radius: 20px;
+    padding: 2px 8px;
+    font-size: .75rem;
+    margin-bottom: .5rem;
 }
 
-.symptom-content .symptom-desc {
-    font-size: 0.95rem;
-    color: #343a40;
-    font-weight: 500;
-    height: 40px; /* Jaga tinggi tetap sama */
+.symptom-body p {
+    font-size: .9rem;
+    margin: 0;
 }
 
-/* === Gaya Saat Gejala Dipilih === */
-.symptom-card.checked {
-    border-color: #007bff;
-    background-color: #e7f3ff;
-    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.2);
+/* CHECKED */
+.symptom-card input:checked + .symptom-body {
+    background: #e7f1ff;
+    border-color: #0d6efd;
+    box-shadow: 0 8px 20px rgba(13,110,253,.25);
 }
 
-.symptom-card.checked .symptom-content .symptom-icon {
-    color: #0056b3;
-}
-
-.symptom-card.checked .symptom-content .symptom-code {
-    background-color: #007bff;
-    color: #fff;
-}
-
-/* Navigasi Wizard */
-.wizard-navigation {
+/* ===== NAV ===== */
+.wizard-nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     margin-top: 2rem;
-    border-top: 1px solid #e9ecef;
     padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
 }
 
-/* 1. Untuk Tablet dan Layar Laptop Kecil (Max-width 992px) */
-@media (max-width: 992px) {
-    .symptom-grid {
-        /* Mengurangi ukuran minimum kolom agar muat lebih banyak di layar sedang */
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-}
-
-/* 2. Untuk Handphone / Layar Sempit (Max-width 576px) */
+/* ===== MOBILE ===== */
 @media (max-width: 576px) {
     
-    /* Kurangi padding kartu utama agar tidak memakan tempat */
-    .wizard-card {
-        padding: 1.25rem 1rem;
-        border-radius: 10px;
+    /* 1. Header & Container */
+    .diagnosa-wizard-card {
+        padding: 1rem;
     }
-
-    /* Judul & Subjudul diperkecil */
-    .step-title {
-        font-size: 1.25rem;
-        text-align: center;
+    .app-content-header h3 {
+        font-size: 1.4rem;
     }
     
+    /* 2. Judul Step */
+    .step-title {
+        font-size: 1.2rem;
+    }
     .step-subtitle {
-        font-size: 0.9rem;
-        text-align: center;
-        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
     }
 
-    /* Progress Bar lebih tipis */
-    .progress-bar {
-        height: 15px;
-        font-size: 0.75rem;
-        line-height: 15px;
-    }
-
-    /* --- GRID GEJALA (PENTING) --- */
+    /* 3. GRID MENJADI 2 KOLOM (Kiri-Kanan) */
     .symptom-grid {
-        /* Ubah minmax jadi lebih kecil (135px) agar di HP bisa 2 kolom (sebelahan) */
-        /* Jika pakai 220px, di HP akan jadi 1 kolom panjang ke bawah */
-        grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
-        gap: 0.75rem; /* Jarak antar kartu dirapatkan */
-        margin-bottom: 1.5rem;
+        /* Memaksa menjadi 2 kolom dengan lebar seimbang */
+        grid-template-columns: repeat(2, 1fr) !important; 
+        gap: 0.8rem; /* Jarak antar kartu diperkecil */
     }
 
-    /* Kartu Gejala */
-    .symptom-card {
-        padding: 1rem 0.5rem; /* Padding dalam kartu diperkecil */
+    /* 4. Penyesuaian Isi Kartu agar Muat di 2 Kolom */
+    .symptom-body {
+        padding: 1rem 0.5rem; /* Padding dalam diperkecil */
+        min-height: 150px;    /* Tinggi minimum agar kartu terlihat seragam */
+        justify-content: flex-start; /* Isi rata atas */
     }
 
-    .symptom-content .symptom-icon {
-        font-size: 2rem; /* Ikon diperkecil */
+    .symptom-body .icon {
+        font-size: 1.8rem; /* Perkecil Icon */
         margin-bottom: 0.5rem;
     }
 
-    .symptom-content .symptom-code {
-        font-size: 0.75rem; /* Kode gejala lebih kecil */
+    .symptom-body .code {
+        font-size: 0.7rem; /* Perkecil Badge Kode */
         padding: 2px 6px;
+        margin-bottom: 0.5rem;
     }
 
-    .symptom-content .symptom-desc {
-        font-size: 0.8rem; /* Deskripsi teks lebih kecil */
+    .symptom-body p {
+        font-size: 0.75rem; /* Perkecil Teks Deskripsi */
         line-height: 1.3;
-        /* Hapus height fix atau sesuaikan agar teks panjang tidak terpotong */
-        height: auto; 
-        min-height: 35px;
     }
 
-    /* Navigasi (Tombol Next/Prev) */
-    .wizard-navigation {
-        flex-direction: column-reverse; /* Tombol disusun ke bawah (Back di bawah Next) */
+    /* 5. Navigation Buttons */
+    .wizard-nav {
+        flex-direction: column-reverse; /* Tombol tumpuk vertikal */
         gap: 10px;
-        padding-top: 1rem;
-    }
-
-    /* Tombol menjadi lebar penuh agar mudah ditekan jari */
-    .wizard-navigation .btn {
-        width: 100%;
-        padding: 0.75rem;
-        font-size: 1rem;
     }
     
-    /* Opsional: Tombol Back jadi outline atau warna beda agar tidak salah pencet */
-    .wizard-navigation .btn-secondary {
-        background-color: transparent;
-        color: #6c757d;
-        border: 1px solid #dee2e6;
+    .wizard-nav button {
+        width: 100%;
+        margin-left: 0 !important;
+        padding: 0.6rem;
+    }
+}
+/* --- Tablet Devices (576px - 991px) --- */
+@media (min-width: 576.01px) and (max-width: 991.98px) {
+    .symptom-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Kolom di tablet */
     }
 }

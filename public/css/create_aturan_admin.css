@@ -1,0 +1,209 @@
+/* =========================================================
+   GLOBAL FORM STYLE
+========================================================= */
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+input.form-control,
+select.form-select {
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.15rem rgba(13,110,253,.15);
+}
+
+/* =========================================================
+   CARD MODERN
+========================================================= */
+.card {
+    border: 0;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 1rem 1.25rem;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-footer {
+    background: #fafafa;
+    border-top: 1px solid #eee;
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+.section-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* =========================================================
+   SYMPTOM / SOLUTION GRID
+========================================================= */
+.symptom-grid-wrapper {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #fafafa;
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+.symptom-grid-wrapper.is-invalid {
+    border-color: #dc3545;
+    background: #fff5f5;
+}
+
+/* GRID */
+.symptom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 12px;
+}
+
+/* CARD ITEM */
+.symptom-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 0.75rem 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+/* HIDE CHECKBOX */
+.symptom-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* CONTENT */
+.symptom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.symptom-code {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #0d6efd;
+}
+
+.symptom-desc {
+    font-size: 0.9rem;
+    color: #495057;
+    line-height: 1.35;
+}
+
+/* HOVER */
+.symptom-card:hover {
+    border-color: #0d6efd;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,.08);
+}
+
+/* CHECKED */
+.symptom-card:has(input:checked) {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(13,110,253,.35);
+}
+
+.symptom-card:has(input:checked) .symptom-code,
+.symptom-card:has(input:checked) .symptom-desc {
+    color: #ffffff;
+}
+
+/* CHECK ICON */
+.symptom-card::after {
+    content: "✓";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    opacity: 0;
+    transform: scale(0.6);
+    transition: all 0.2s ease;
+}
+
+.symptom-card:has(input:checked)::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    box-shadow: 0 6px 16px rgba(13,110,253,.35);
+}
+
+.btn-success {
+    box-shadow: 0 4px 12px rgba(25,135,84,.35);
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+.modal-content {
+    border-radius: 14px;
+    border: 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,.15);
+}
+
+.modal-header {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.modal-footer {
+    border-top: 1px solid #f1f1f1;
+}
+
+/* =========================================================
+   IMAGE PREVIEW
+========================================================= */
+#preview-container img {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 768px) {
+    .symptom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .symptom-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}

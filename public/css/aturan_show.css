@@ -1,0 +1,158 @@
+/* ===============================
+   HEADER
+================================ */
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.detail-title {
+    font-weight: 800;
+    margin-top: 0.5rem;
+}
+
+.badge-kode-lg {
+    background: linear-gradient(135deg, #ff7675, #d63031);
+    padding: 0.5em 1em;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+/* ===============================
+   CARD
+================================ */
+.card-modern {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+}
+
+.card-header-modern {
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-header-modern.success {
+    color: #198754;
+}
+
+/* ===============================
+   IMAGE
+================================ */
+.disease-image-modern {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 16px;
+    border: 1px solid #eee;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 220px;
+    border-radius: 16px;
+    background: #f1f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #adb5bd;
+}
+
+/* ===============================
+   PROBABILITY
+================================ */
+.probability-box span {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.probability-box h3 {
+    font-weight: 800;
+    color: #0d6efd;
+}
+
+/* ===============================
+   GEJALA
+================================ */
+.gejala-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.gejala-pill {
+    background: #f1f3f5;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+}
+
+.gejala-pill .kode {
+    background: #0d6efd;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* ===============================
+   SOLUSI
+================================ */
+.solution-modern-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.solution-modern-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f8f9fa;
+}
+
+.solution-modern-item img,
+.solution-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid #eee;
+}
+
+.solution-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+}
+
+.badge-solusi {
+    background: #198754;
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.35em 0.6em;
+    font-size: 0.75rem;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.btn-modern {
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+}

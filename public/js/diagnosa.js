@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
     const totalSteps = steps.length;
 
-    // Fungsi untuk menampilkan langkah berdasarkan nomor
+    /* =========================
+       TAMPILKAN STEP
+    ========================== */
     function showStep(stepIndex) {
-        // Sembunyikan semua langkah
         steps.forEach((step) => step.classList.remove("active"));
 
-        // Tampilkan langkah yang diinginkan
         if (steps[stepIndex]) {
             steps[stepIndex].classList.add("active");
             currentStep = stepIndex;
@@ -22,15 +22,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Fungsi untuk memperbarui progress bar
+    /* =========================
+       UPDATE PROGRESS BAR + %
+    ========================== */
     function updateProgressBar() {
-        // Menghitung persentase progress
-        const progress = (currentStep / (totalSteps - 1)) * 100;
+        // contoh:
+        // step 0 dari 4 = 0%
+        // step 1 dari 4 = 25%
+        const progress = Math.round((currentStep / (totalSteps - 1)) * 100);
+
         progressBar.style.width = progress + "%";
-        // Opsional: Update aria-valuenow untuk aksesibilitas
+        progressBar.textContent = progress + "%"; // ⭐ INI YANG KURANG
         progressBar.setAttribute("aria-valuenow", progress);
     }
-    // Event listener untuk tombol "Berikutnya"
+
+    /* =========================
+       NEXT STEP
+    ========================== */
     nextButtons.forEach((button) => {
         button.addEventListener("click", () => {
             if (currentStep < totalSteps - 1) {
@@ -39,56 +47,52 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Event listener untuk tombol "Sebelumnya"
+    /* =========================
+       PREVIOUS STEP
+    ========================== */
     prevButtons.forEach((button) => {
         button.addEventListener("click", () => {
             if (currentStep > 0) {
-                // PERBAIKAN: Gunakan kurang (-) bukan tambah (+)
                 showStep(currentStep - 1);
             }
         });
     });
 
-    // Event listener untuk kartu gejala (toggle class 'checked')
+    /* =========================
+       CHECK SYMPTOM CARD
+    ========================== */
     symptomCards.forEach((card) => {
         const checkbox = card.querySelector('input[type="checkbox"]');
-        card.addEventListener("click", (e) => {
-            // Kita toggle class 'checked' berdasarkan status checkbox
-            if (checkbox.checked) {
-                card.classList.add("checked");
-            } else {
-                card.classList.remove("checked");
-            }
+
+        card.addEventListener("click", () => {
+            checkbox.checked = !checkbox.checked;
+            card.classList.toggle("checked", checkbox.checked);
         });
     });
 
-    // Event listener untuk submit form
+    /* =========================
+       SUBMIT FORM
+    ========================== */
     form.addEventListener("submit", function (e) {
-        e.preventDefault(); // Hentikan submit otomatis
+        e.preventDefault();
 
-        // Cek jika ada SweetAlert2
         if (typeof Swal === "undefined") {
-            // Jika tidak ada SweetAlert, langsung submit
             form.submit();
-        } else {
-            // Tampilkan loading spinner
-            Swal.fire({
-                title: "Menganalisis Gejala...",
-                text: "Mohon tunggu, sistem sedang menghitung diagnosis.",
-                imageUrl: "https://i.gifer.com/ZZ5H.gif", // Anda bisa ganti dengan URL loading GIF
-                imageWidth: 100,
-                imageHeight: 100,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                },
-            });
-
-            // Langsung submit form ke backend
-            form.submit();
+            return;
         }
+
+        Swal.fire({
+            title: "Menganalisis Gejala...",
+            text: "Sistem sedang memproses diagnosis",
+            allowOutsideClick: false,
+            didOpen: () => Swal.showLoading(),
+        });
+
+        form.submit();
     });
 
-    // Tampilkan langkah pertama saat halaman dimuat
-    showStep(0);
+    /* =========================
+       INIT
+    ========================== */
+    showStep(0); // step awal = 0% ✔
 });

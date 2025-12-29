@@ -18,13 +18,42 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         // Validasi data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'role' => 'required|exists:roles,id',
-            'password' => ['nullable', 'confirmed', Password::min(8)],
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+                'role' => 'required|exists:roles,id',
+                'password' => ['nullable', 'confirmed', Password::min(8)],
+            ],
+            $messages = [
+                // Validasi Nama
+                'name.required' => 'Nama Lengkap wajib diisi.',
+                'name.string'   => 'Nama Lengkap harus berupa teks.',
+                'name.max'      => 'Nama Lengkap tidak boleh lebih dari 255 karakter.',
+
+                // Validasi Username
+                'username.required' => 'Username wajib diisi.',
+                'username.string'   => 'Username harus berupa teks.',
+                'username.max'      => 'Username tidak boleh lebih dari 255 karakter.',
+                'username.unique'   => 'Username ini sudah digunakan, silakan pilih yang lain.',
+
+                // Validasi Email
+                'email.required' => 'Alamat Email wajib diisi.',
+                'email.string'   => 'Email harus berupa teks.',
+                'email.email'    => 'Format Email tidak valid.',
+                'email.max'      => 'Email tidak boleh lebih dari 255 karakter.',
+                'email.unique'   => 'Email ini sudah terdaftar pada akun lain.',
+
+                // Validasi Role
+                'role.required' => 'Wajib memilih Role (Peran).',
+                'role.exists'   => 'Role yang dipilih tidak valid.',
+
+                // Validasi Password
+                'password.confirmed' => 'Konfirmasi Kata Sandi tidak cocok.',
+                'password.min'       => 'Kata Sandi minimal harus 8 karakter.',
+            ]
+        );
 
         // Update data pengguna
         $user->name = $request->name;

@@ -1,18 +1,16 @@
 @extends('admin.layout.dashboard')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/edit.css') }}">
+@endpush
+
 @section('content')
     <main class="app-main">
         <div class="app-content-header">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-sm-6">
-                        <h3 class="mb-0">Tambah Pengguna Baru</h3>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}">Manajemen Pengguna</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Tambah</li>
-                        </ol>
+                        <h3 class="fw-bold mb-0">Tambah Pengguna Baru</h3>
                     </div>
                 </div>
             </div>
@@ -21,103 +19,123 @@
         <div class="app-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 mx-auto">
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h3 class="card-title">Formulir Pengguna Baru</h3>
+                    <div class="col-lg-9 mx-auto">
+                        <div class="card modern-card">
+                            <div class="card-header modern-card-header">
+                                <h5 class="mb-0"><i class="bi bi-person-plus-fill me-2"></i> Formulir Pengguna Baru</h5>
                             </div>
-                            <div class="card-body">
-                                <form action="{{ route('admin.users.store') }}" method="POST">
+
+                            <div class="card-body p-4">
+                                <form action="{{ route('admin.users.store') }}" method="POST" novalidate>
                                     @csrf
-
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Nama Lengkap</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                id="name" name="name" value="{{ old('name') }}" required>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Nama Lengkap</label>
+                                            <div class="input-group modern-input">
+                                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                                <input type="text" name="name"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    value="{{ old('name') }}" placeholder="Contoh: Budi Santoso">
+                                            </div>
+                                            @error('name')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('name')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">Username</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-at"></i></span>
-                                            <input type="text"
-                                                class="form-control @error('username') is-invalid @enderror" id="username"
-                                                name="username" value="{{ old('username') }}" required>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Username</label>
+                                            <div class="input-group modern-input">
+                                                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                                                <input type="text" name="username"
+                                                    class="form-control @error('username') is-invalid @enderror"
+                                                    value="{{ old('username') }}" placeholder="Contoh: budi123">
+                                            </div>
+                                            @error('username')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('username')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Alamat Email</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                                id="email" name="email" value="{{ old('email') }}" required>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email</label>
+                                            <div class="input-group modern-input">
+                                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                                <input type="email" name="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    value="{{ old('email') }}" placeholder="contoh@email.com">
+                                            </div>
+                                            @error('email')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('email')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
 
-                                    <div class="mb-3">
-                                        <label for="role" class="form-label">Peran (Role)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-shield-lock-fill"></i></span>
-                                            <select class="form-select @error('role') is-invalid @enderror" id="role"
-                                                name="role">
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}"
-                                                        {{ old('role') == $role->id ? 'selected' : '' }}>
-                                                        {{ $role->display_name }}
+                                        <div class="col-md-6">
+                                            <label class="form-label">Role</label>
+
+                                            <div class="input-group modern-input">
+                                                <span class="input-group-text">
+                                                    <i class="bi bi-shield-lock"></i>
+                                                </span>
+
+                                                <select name="role"
+                                                    class="form-select @error('role') is-invalid @enderror">
+                                                    <option value="" selected disabled>-- Pilih Role --</option>
+                                                    <option value="1" {{ old('role') == '1' ? 'selected' : '' }}>Admin
                                                     </option>
-                                                @endforeach
-                                            </select>
+                                                    <option value="2" {{ old('role') == '2' ? 'selected' : '' }}>
+                                                        Penyuluh Pertanian</option>
+                                                    <option value="3" {{ old('role') == '3' ? 'selected' : '' }}>
+                                                        Petani
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            @error('role')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
-                                        @error('role')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
+
+                                        <div class="col-md-6">
+                                            <label class="form-label">Kata Sandi</label>
+                                            <label class="form-label">Kata Sandi</label>
+                                            <div class="input-group modern-input">
+                                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+
+                                                <input type="password" id="password" name="password"
+                                                    class="form-control @error('password') is-invalid @enderror"
+                                                    placeholder="********">
+
+                                                <span class="input-group-text" onclick="toggleMyPassword('password', this)"
+                                                    style="cursor: pointer; z-index: 1000;">
+                                                    <i class="bi bi-eye-slash"></i>
+                                                </span>
+                                                @error('password')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label">Konfirmasi Kata Sandi</label>
+                                            <div class="input-group modern-input">
+                                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+
+                                                <input type="password" id="password_confirmation"
+                                                    name="password_confirmation" class="form-control"
+                                                    placeholder="********">
+
+                                                <span class="input-group-text"
+                                                    onclick="toggleMyPassword('password_confirmation', this)"
+                                                    style="cursor: pointer; z-index: 1000;">
+                                                    <i class="bi bi-eye-slash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Kata Sandi</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                            <input type="password"
-                                                class="form-control @error('password') is-invalid @enderror" id="password"
-                                                name="password" required>
-                                            <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
-                                                <i class="bi bi-eye-slash-fill"></i>
-                                            </span>
-                                        </div>
-                                        @error('password')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                                            <input type="password" class="form-control" id="password_confirmation"
-                                                name="password_confirmation" required>
-                                            <span class="input-group-text" id="togglePasswordConfirmation"
-                                                style="cursor: pointer;">
-                                                <i class="bi bi-eye-slash-fill"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-footer bg-white">
-                                        <button type="submit" class="btn btn-primary">Simpan Pengguna</button>
-                                        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
+                                    <div class="d-flex justify-content-end gap-2 mt-4">
+                                        <button type="submit" class="btn btn-primary px-4">Simpan</button>
                                     </div>
                                 </form>
                             </div>
@@ -131,40 +149,31 @@
 
 @push('scripts')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        // Membuat fungsi global agar bisa dipanggil langsung dari onclick HTML
+        window.toggleMyPassword = function(inputId, iconSpan) {
+            // Cari input berdasarkan ID
+            var input = document.getElementById(inputId);
+            // Cari icon <i> di dalam tombol yang diklik
+            var icon = iconSpan.querySelector('i');
 
-            // Fungsi reusable untuk toggle password
-            function setupPasswordToggle(toggleId, inputId) {
-                const toggleElement = document.querySelector(toggleId);
-                const inputElement = document.querySelector(inputId);
+            // Debugging: Cek di console apakah fungsi terpanggil
+            console.log('Tombol diklik untuk:', inputId);
 
-                if (!toggleElement || !inputElement) return;
-
-                toggleElement.addEventListener('click', function() {
-                    // 1. Cek tipe saat ini
-                    const type = inputElement.getAttribute('type') === 'password' ? 'text' : 'password';
-
-                    // 2. Ubah tipe input
-                    inputElement.setAttribute('type', type);
-
-                    // 3. Ubah Ikon (Mata Coret <-> Mata Biasa)
-                    const icon = this.querySelector('i');
-                    if (type === 'text') {
-                        icon.classList.remove('bi-eye-slash-fill');
-                        icon.classList.add('bi-eye-fill');
-                    } else {
-                        icon.classList.remove('bi-eye-fill');
-                        icon.classList.add('bi-eye-slash-fill');
-                    }
-                });
+            if (input && icon) {
+                if (input.type === "password") {
+                    // Ubah jadi Text
+                    input.type = "text";
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                } else {
+                    // Ubah jadi Password
+                    input.type = "password";
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
+                }
+            } else {
+                console.error('Element tidak ditemukan! Cek ID input.');
             }
-
-            // Panggil fungsi untuk Password Utama
-            setupPasswordToggle('#togglePassword', '#password');
-
-            // Panggil fungsi untuk Konfirmasi Password
-            setupPasswordToggle('#togglePasswordConfirmation', '#password_confirmation');
-
-        });
+        };
     </script>
 @endpush

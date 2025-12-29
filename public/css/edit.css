@@ -1,0 +1,80 @@
+.modern-card {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.modern-card-header {
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    border-radius: 16px 16px 0 0;
+}
+
+.modern-input .input-group-text {
+    background: #f8f9fa;
+    border-right: none;
+}
+
+.modern-input .form-control,
+.modern-input .form-select {
+    border-left: none;
+}
+
+.toggle-password {
+    cursor: pointer;
+}
+
+/* --- Mobile Devices (Max Width 576px) --- */
+@media (max-width: 576px) {
+    /* Judul Halaman */
+    .app-content-header h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px !important;
+        text-align: center;
+    }
+
+    /* Container Padding */
+    .app-content {
+        padding: 10px;
+    }
+
+    /* Card Padding */
+    .modern-card .card-body {
+        padding: 1.25rem !important; /* Kurangi padding dalam card */
+    }
+
+    /* Form Fields menjadi Full Width & Jarak Antar Field */
+    .col-md-6 {
+        margin-bottom: 15px; /* Tambah jarak vertikal antar input */
+    }
+
+    /* Input Font Size (Agar tidak zoom otomatis di iOS) */
+    .form-control, .form-select {
+        font-size: 16px; 
+        padding: 0.6rem 0.8rem;
+    }
+
+    /* Tombol Simpan Full Width */
+    .d-flex.justify-content-end {
+        display: block !important;
+        width: 100%;
+    }
+    
+    .btn-primary {
+        width: 100%;
+        margin-top: 10px;
+        padding: 12px;
+    }
+}
+
+/* --- Tablet Devices (576px - 992px) --- */
+@media (min-width: 576.01px) and (max-width: 991.98px) {
+    .col-lg-9 {
+        width: 100%; /* Gunakan lebar penuh pada tablet */
+    }
+    
+    .modern-card {
+        margin-bottom: 2rem;
+    }
+}

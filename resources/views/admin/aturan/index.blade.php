@@ -1,132 +1,146 @@
 @extends('admin.layout.dashboard')
-{{-- ... (style) ... --}}
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/aturan_admin.css') }}">
 @endpush
+
 @section('content')
     <main class="app-main">
+        <!-- HEADER -->
         <div class="app-content-header">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3 class="mb-0">Basis Pengetahuan (Aturan)</h3>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="page-title">Basis Pengetahuan</h3>
+                        <p class="text-muted mb-0">Aturan penyakit, gejala, dan solusi penanganan</p>
                     </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor Admin</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Aturan</li>
+                    <nav>
+                        <ol class="breadcrumb bg-transparent mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('admin.dashboard') }}">Dasbor</a>
+                            </li>
+                            <li class="breadcrumb-item active">Aturan</li>
                         </ol>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
 
+        <!-- CONTENT -->
         <div class="app-content">
             <div class="container-fluid">
-                {{-- ... (Notifikasi Sukses) ... --}}
+
                 @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="alert alert-success alert-modern">
+                        <i class="bi bi-check-circle-fill"></i>
                         {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                <div class="mb-3">
-                    <a href="{{ route('admin.aturan.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle-fill"></i> Tambah Penyakit & Aturan Baru
+                <!-- ACTION BAR -->
+                <div class="action-bar">
+                    <a href="{{ route('admin.aturan.create') }}" class="btn btn-primary btn-modern">
+                        <i class="bi bi-plus-circle"></i>
+                        Tambah Aturan
                     </a>
+
+                    <form action="{{ route('admin.aturan.index') }}" method="GET" class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" name="search" placeholder="Cari penyakit..." value="{{ request('search') }}">
+                    </form>
                 </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            {{-- ... (Card Header dengan Form Pencarian) ... --}}
-                            <div class="card-header">
-                                <h3 class="card-title">Daftar Aturan Penyakit, Gejala & Solusi Penanganan</h3>
-                                <div class="card-tools">
-                                    <form action="{{ route('admin.aturan.index') }}" method="GET"
-                                        class="input-group input-group-sm" style="width: 250px;">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Cari penyakit..." value="{{ request('search') }}">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="bi bi-search"></i>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                <!-- CARD -->
+                <div class="card card-modern">
+                    <div class="card-body p-0">
 
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
-                                    <thead>
+                        <div class="table-responsive">
+                            <table class="table table-modern">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Kode</th>
+                                        <th>Nama Penyakit</th>
+                                        <th>Gejala</th>
+                                        <th class="text-end">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($penyakits as $index => $penyakit)
                                         <tr>
-                                            {{-- ... (th no, kode, nama) ... --}}
-                                            <th style="width: 10px">No</th>
-                                            <th>Kode</th>
-                                            <th>Nama Penyakit</th>
-                                            <th>Gejala Terhubung</th>
-                                            <th style="width: 180px">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($penyakits as $index => $penyakit)
-                                            <tr class="align-middle">
-                                                <td>{{ $penyakits->firstItem() + $index }}</td>
-                                                <td><span class="badge bg-danger">{{ $penyakit->kode }}</span></td>
-                                                <td>{{ $penyakit->nama_penyakit }}</td>
-                                                <td class="gejala-list">
-                                                    {{-- ... (loop gejala) ... --}}
+                                            <td>{{ $penyakits->firstItem() + $index }}</td>
+
+                                            <td>
+                                                <span class="badge badge-kode">
+                                                    {{ $penyakit->kode }}
+                                                </span>
+                                            </td>
+
+                                            <td class="fw-semibold">
+                                                {{ $penyakit->nama_penyakit }}
+                                            </td>
+
+                                            <td>
+                                                <div class="gejala-wrap">
                                                     @forelse ($penyakit->gejalas->sortBy('kode') as $gejala)
-                                                        <span class="badge bg-secondary">{{ $gejala->kode }}</span>
+                                                        <span class="badge badge-gejala">
+                                                            {{ $gejala->kode }}
+                                                        </span>
                                                     @empty
-                                                        <span class="text-muted">Belum ada gejala terhubung</span>
+                                                        <span class="text-muted fst-italic">
+                                                            Tidak ada gejala
+                                                        </span>
                                                     @endforelse
-                                                </td>
-                                                <td>
-                                                    <a href="{{ route('admin.aturan.show', $penyakit->id) }}"
-                                                        class="btn btn-sm btn-success ">
-                                                        <i class="bi bi-eye-fill"></i> Lihat
-                                                    </a>
-                                                    <a href="{{ route('admin.aturan.edit', $penyakit->id) }}"
-                                                        class="btn btn-sm btn-info">
-                                                        <i class="bi bi-pencil-square"></i> Edit
-                                                    </a>
+                                                </div>
+                                            </td>
 
-                                                    <form action="{{ route('admin.aturan.destroy', $penyakit->id) }}"
-                                                        method="POST" class="d-inline"
-                                                        id="delete-form-{{ $penyakit->id }}">
-                                                        @csrf
-                                                        @method('DELETE')
+                                            <td class="text-end">
+                                                <a href="{{ route('admin.aturan.show', $penyakit->id) }}"
+                                                    class="btn-icon btn-view" title="Lihat">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
 
-                                                        <button type="button" class="btn btn-sm btn-danger delete-btn"
-                                                            data-id="{{ $penyakit->id }}"
-                                                            data-name="{{ $penyakit->nama_penyakit }}">
-                                                            <i class="bi bi-trash-fill"></i> Hapus
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="5" class="text-center text-muted">Data penyakit tidak
-                                                    ditemukan.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                            {{-- ... (Card Footer Paginasi) ... --}}
-                            <div class="card-footer d-flex justify-content-end custom-pagination">
-                                {{ $penyakits->appends(request()->query())->links() }}
-                            </div>
+                                                <a href="{{ route('admin.aturan.edit', $penyakit->id) }}"
+                                                    class="btn-icon btn-edit" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+
+                                                <form action="{{ route('admin.aturan.destroy', $penyakit->id) }}"
+                                                    method="POST" class="d-inline" id="delete-form-{{ $penyakit->id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="button" class="btn-icon btn-delete delete-btn"
+                                                        data-id="{{ $penyakit->id }}"
+                                                        data-name="{{ $penyakit->nama_penyakit }}" title="Hapus">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted py-4">
+                                                Data penyakit tidak ditemukan
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                         </div>
+
+                    </div>
+
+                    <div class="card-footer card-footer-modern">
+                        {{ $penyakits->appends(request()->query())->links() }}
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
 @endsection
+
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
