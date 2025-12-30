@@ -174,6 +174,60 @@
 
 
 @push('modals')
+
+    <div class="modal fade" id="modalTambahGejala" tabindex="-1" aria-labelledby="modalTambahGejalaLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTambahGejalaLabel">Tambah Gejala Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formTambahGejala">
+                        @csrf
+                        <!-- Input Kode Gejala -->
+                        <div class="mb-3">
+                            <label for="gejala_kode" class="form-label">Kode Gejala (cth: G28)</label>
+                            <input type="text" class="form-control" id="gejala_kode" name="kode"
+                                placeholder="Masukkan kode">
+                            <div class="invalid-feedback" id="error_gejala_kode"></div>
+                        </div>
+
+                        <!-- Input Nama Gejala -->
+                        <div class="mb-3">
+                            <label for="gejala_nama" class="form-label">Nama Gejala</label>
+                            <input type="text" class="form-control" id="gejala_nama" name="gejala"
+                                placeholder="Masukkan nama gejala">
+                            <div class="invalid-feedback" id="error_gejala_nama"></div>
+                        </div>
+
+                        <!-- Input Kategori (Bagian Tanaman) - BARU -->
+                        <div class="mb-3">
+                            <label for="gejala_bagian" class="form-label">Bagian Tanaman / Kategori</label>
+                            <select class="form-select" id="gejala_bagian" name="bagian">
+                                <option value="" selected disabled>-- Pilih Kategori Gejala --</option>
+                                <option value="daun">Gejala pada daun</option>
+                                <option value="batang_pucuk">Gejala pada batang & pucuk</option>
+                                <option value="biji_gabah">Gejala pada biji dan gabah</option>
+                                <option value="umum">Gejala umum pada tanaman</option>
+                            </select>
+                            <div class="invalid-feedback" id="error_gejala_bagian"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <!-- Pastikan data-url diisi dengan route yang sesuai -->
+                    <button type="button" class="btn btn-primary" id="btnSimpanGejala"
+                        data-url="{{ route('admin.gejala.store.ajax') }}">
+                        Simpan Gejala
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modalTambahSolusi" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
