@@ -174,39 +174,6 @@
 
 
 @push('modals')
-    <div class="modal fade" id="modalTambahGejala" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Gejala Baru (AJAX)</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="formTambahGejala">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="form-label">Kode Gejala</label>
-                            <input type="text" class="form-control" name="kode" placeholder="Contoh: G01">
-                            <div class="invalid-feedback error-text code_error"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Nama Gejala</label>
-                            <textarea class="form-control" name="gejala" rows="3" placeholder="Deskripsi gejala..."></textarea>
-                            <div class="invalid-feedback error-text name_error"></div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-success" id="btnSimpanGejala"
-                        data-url="{{ route('admin.aturan.storeGejalaAjax') }}">
-                        Simpan Gejala
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="modalTambahSolusi" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -218,28 +185,29 @@
                     <form id="formTambahSolusi" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Kode Solusi</label>
-                            <input type="text" class="form-control" name="kode" placeholder="Contoh: S01">
-                            <div class="invalid-feedback error-text code_error"></div>
+                            <label for="solusi_kode" class="form-label">Kode Solusi</label>
+                            <input type="text" class="form-control" id="solusi_kode" name="kode">
+                            <div class="invalid-feedback" id="error_solusi_kode"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Nama Obat/Solusi</label>
-                            <input type="text" class="form-control" name="nama_obat">
-                            <div class="invalid-feedback error-text name_error"></div>
+                            <label for="solusi_nama" class="form-label">Nama Obat</label>
+                            <input type="text" class="form-control" id="solusi_nama" name="nama_obat">
+                            <div class="invalid-feedback" id="error_solusi_nama"></div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Gambar (Opsional)</label>
-                            <input type="file" class="form-control" name="gambar" accept="image/*"
-                                onchange="previewModalImage(this)">
-                            <div class="invalid-feedback error-text image_error"></div>
+                            <label for="solusi_gambar" class="form-label">Gambar</label>
+                            <input type="file" class="form-control" id="solusi_gambar" name="gambar"
+                                accept="image/*">
+                            <div class="invalid-feedback" id="error_solusi_gambar"></div>
+                            <div class="mt-2 d-none" id="preview-container">
+                                <p class="text-muted small mb-1">Preview:</p>
 
-                            <div class="mt-2 d-none" id="preview-container-solusi">
-                                <img src="" id="img-preview-solusi" class="img-thumbnail"
-                                    style="max-height: 100px; object-fit: cover;">
+                                <img src="" id="img-preview" class="img-thumbnail" style="max-height: 100px;">
                             </div>
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
