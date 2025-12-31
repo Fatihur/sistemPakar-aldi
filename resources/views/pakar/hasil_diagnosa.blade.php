@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-end">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dasbor</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('pakar.dashboard') }}">Dasbor</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('pakar.diagnosa.index') }}">Diagnosis</a></li>
                             <li class="breadcrumb-item active">Hasil</li>
                         </ol>
