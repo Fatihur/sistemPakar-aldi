@@ -233,7 +233,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route('pakar.gejala.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.gejala.*') ? 'active' : '' }}">
+                                class="nav-link {{ request()->routeIs('pakar.gejala.*') ? 'active' : '' }}">
                                 <i class="nav-icon bi bi-activity"></i>
                                 <p>Data Gejala</p>
                             </a>
