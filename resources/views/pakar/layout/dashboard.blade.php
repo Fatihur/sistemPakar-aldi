@@ -469,8 +469,8 @@
                 text: "Apakah Anda yakin ingin keluar?",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Ya, Keluar!',
                 cancelButtonText: 'Batal'
             }).then((result) => {
